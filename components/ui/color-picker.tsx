@@ -651,15 +651,14 @@ function ColorPickerRoot(props: ColorPickerRootProps) {
   );
 }
 
-interface ColorPickerRootImplProps
-  extends Omit<
-    ColorPickerRootProps,
-    | "defaultValue"
-    | "onValueChange"
-    | "format"
-    | "defaultFormat"
-    | "onFormatChange"
-  > {}
+type ColorPickerRootImplProps = Omit<
+  ColorPickerRootProps,
+  | "defaultValue"
+  | "onValueChange"
+  | "format"
+  | "defaultFormat"
+  | "onFormatChange"
+>;
 
 function ColorPickerRootImpl(props: ColorPickerRootImplProps) {
   const {
