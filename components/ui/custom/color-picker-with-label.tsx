@@ -54,6 +54,13 @@ export function ColorPickerWithLabel({
         <ColorPickerContent>
           <ColorPickerArea />
           <div className="flex items-center gap-2">
+            <ColorPickerEyeDropper />
+            <div className="flex flex-1 flex-col gap-2">
+              <ColorPickerHueSlider />
+              <ColorPickerAlphaSlider />
+            </div>
+          </div>
+          <div className="flex items-center gap-2">
             <ColorPickerFormatSelect />
             <ColorPickerInput />
           </div>

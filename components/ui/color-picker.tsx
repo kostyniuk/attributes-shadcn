@@ -666,7 +666,6 @@ function ColorPickerRootImpl(props: ColorPickerRootImplProps) {
     value: valueProp,
     dir: dirProp,
     defaultOpen,
-    open: openProp,
     onOpenChange,
     name,
     ref,
@@ -705,7 +704,7 @@ function ColorPickerRootImpl(props: ColorPickerRootImplProps) {
         store.setHsv(hsv);
       }
     }
-  }, [valueProp]);
+  }, [valueProp, store]);
 
   // React.useEffect(() => {
   //   if (openProp !== undefined) {
@@ -733,7 +732,7 @@ function ColorPickerRootImpl(props: ColorPickerRootImplProps) {
       store.setOpen(newOpen);
       onOpenChange?.(newOpen);
     },
-    [store.setOpen, onOpenChange],
+    [store, onOpenChange],
   );
 
   const RootPrimitive = asChild ? Slot : "div";
@@ -782,8 +781,7 @@ function ColorPickerRootImpl(props: ColorPickerRootImplProps) {
   );
 }
 
-interface ColorPickerTriggerProps
-  extends React.ComponentProps<typeof PopoverTrigger> {}
+type ColorPickerTriggerProps = React.ComponentProps<typeof PopoverTrigger>;
 
 function ColorPickerTrigger(props: ColorPickerTriggerProps) {
   const { asChild, ...triggerProps } = props;
@@ -798,8 +796,7 @@ function ColorPickerTrigger(props: ColorPickerTriggerProps) {
   );
 }
 
-interface ColorPickerContentProps
-  extends React.ComponentProps<typeof PopoverContent> {}
+type ColorPickerContentProps = React.ComponentProps<typeof PopoverContent>;
 
 function ColorPickerContent(props: ColorPickerContentProps) {
   const { asChild, className, children, ...popoverContentProps } = props;
@@ -945,8 +942,7 @@ function ColorPickerArea(props: ColorPickerAreaProps) {
   );
 }
 
-interface ColorPickerHueSliderProps
-  extends React.ComponentProps<typeof SliderPrimitive.Root> {}
+type ColorPickerHueSliderProps = React.ComponentProps<typeof SliderPrimitive.Root>;
 
 function ColorPickerHueSlider(props: ColorPickerHueSliderProps) {
   const { className, ...sliderProps } = props;
@@ -991,8 +987,7 @@ function ColorPickerHueSlider(props: ColorPickerHueSliderProps) {
   );
 }
 
-interface ColorPickerAlphaSliderProps
-  extends React.ComponentProps<typeof SliderPrimitive.Root> {}
+type ColorPickerAlphaSliderProps = React.ComponentProps<typeof SliderPrimitive.Root>;
 
 function ColorPickerAlphaSlider(props: ColorPickerAlphaSliderProps) {
   const { className, ...sliderProps } = props;
@@ -1108,8 +1103,7 @@ function ColorPickerSwatch(props: ColorPickerSwatchProps) {
   );
 }
 
-interface ColorPickerEyeDropperProps
-  extends React.ComponentProps<typeof Button> {}
+type ColorPickerEyeDropperProps = React.ComponentProps<typeof Button>;
 
 function ColorPickerEyeDropper(props: ColorPickerEyeDropperProps) {
   const { children, size, ...buttonProps } = props;
