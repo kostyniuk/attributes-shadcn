@@ -1,7 +1,7 @@
 import { TAB_DATA, TICKET_TABS, ATTRIBUTE_TYPES } from "../constants";
 
-export const Preferences = () => {
-  const data = TAB_DATA[ATTRIBUTE_TYPES.TICKET].preferences.data;
+export const ProductionTime = () => {
+  const data = TAB_DATA[ATTRIBUTE_TYPES.TICKET].productionTime.data;
   
   return (
     <div className="mt-4 space-y-3 rounded-md border p-4">

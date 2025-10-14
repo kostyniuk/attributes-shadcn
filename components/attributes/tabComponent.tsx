@@ -2,9 +2,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TAB_DATA, ATTRIBUTE_TYPES, TICKET_TABS, QUOTE_TABS, PART_TABS } from "./constants";
 
 // Ticket components
-import { PersonalInfo } from "./ticket/PersonalInfo";
-import { SocialLinks } from "./ticket/SocialLinks";
-import { Preferences } from "./ticket/Preferences";
+import { Status } from "./ticket/status";
+import { ProductionTime } from "./ticket/production-time";
+import { DeliveryOptions } from "./ticket/delivery-options";
 
 // Quote components
 import { General } from "./quote/General";
@@ -22,7 +22,7 @@ interface TabComponentProps {
 }
 
 export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className }: TabComponentProps) => (
-  <Tabs className={className || "w-100"} defaultValue={defaultValue}>
+  <Tabs className={className || "w-150"} defaultValue={defaultValue}>
     <TabsList>
       <TabsTrigger value={ATTRIBUTE_TYPES.TICKET}>Ticket</TabsTrigger>
       <TabsTrigger value={ATTRIBUTE_TYPES.QUOTE}>Quote</TabsTrigger>
@@ -32,20 +32,20 @@ export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className 
     <TabsContent value={ATTRIBUTE_TYPES.TICKET}>
       <div className="rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
         <h3 className="mb-4 font-semibold text-lg">Ticket</h3>
-        <Tabs defaultValue={TICKET_TABS.PERSONAL}>
+        <Tabs defaultValue={TICKET_TABS.STATUS}>
           <TabsList>
-            <TabsTrigger value={TICKET_TABS.PERSONAL}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].personal.title}</TabsTrigger>
-            <TabsTrigger value={TICKET_TABS.SOCIAL}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].social.title}</TabsTrigger>
-            <TabsTrigger value={TICKET_TABS.PREFERENCES}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].preferences.title}</TabsTrigger>
+            <TabsTrigger value={TICKET_TABS.STATUS}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].status.title}</TabsTrigger>
+            <TabsTrigger value={TICKET_TABS.PRODUCTION_TIME}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].productionTime.title}</TabsTrigger>
+            <TabsTrigger value={TICKET_TABS.DELIVERY_OPTIONS}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].deliveryOptions.title}</TabsTrigger>
           </TabsList>
-          <TabsContent value={TICKET_TABS.PERSONAL}>
-            <PersonalInfo />
+          <TabsContent value={TICKET_TABS.STATUS}>
+            <Status />
           </TabsContent>
-          <TabsContent value={TICKET_TABS.SOCIAL}>
-            <SocialLinks />
+          <TabsContent value={TICKET_TABS.PRODUCTION_TIME}>
+            <ProductionTime />
           </TabsContent>
-          <TabsContent value={TICKET_TABS.PREFERENCES}>
-            <Preferences />
+          <TabsContent value={TICKET_TABS.DELIVERY_OPTIONS}>
+            <DeliveryOptions />
           </TabsContent>
         </Tabs>
       </div>

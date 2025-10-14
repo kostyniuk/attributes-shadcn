@@ -1,7 +1,7 @@
 import { TAB_DATA, TICKET_TABS, ATTRIBUTE_TYPES } from "../constants";
 
-export const PersonalInfo = () => {
-  const data = TAB_DATA[ATTRIBUTE_TYPES.TICKET].personal.data;
+export const Status = () => {
+  const data = TAB_DATA[ATTRIBUTE_TYPES.TICKET].status.data;
   
   return (
     <div className="mt-4 space-y-3 rounded-md border p-4">

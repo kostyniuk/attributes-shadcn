@@ -6,9 +6,9 @@ export const ATTRIBUTE_TYPES = {
 } as const;
 
 export const TICKET_TABS = {
-  PERSONAL: 'personal',
-  SOCIAL: 'social',
-  PREFERENCES: 'preferences'
+  STATUS: 'status',
+  PRODUCTION_TIME: 'productionTime',
+  DELIVERY_OPTIONS: 'deliveryOptions'
 } as const;
 
 export const QUOTE_TABS = {
@@ -26,28 +26,28 @@ export const PART_TABS = {
 // Tab data constants
 export const TAB_DATA = {
   ticket: {
-    personal: {
-      title: "Personal Info",
+    status: {
+      title: "Ticket Status",
       data: [
-        { label: "Full Name", value: "John Doe" },
-        { label: "Email", value: "john.doe@example.com" },
-        { label: "Location", value: "San Francisco, CA" }
+        { label: "Ticket Status", value: "Open" },
+        { label: "Ticket Priority", value: "High" },
+        { label: "Ticket Type", value: "Bug" }
       ]
     },
-    social: {
-      title: "Social Links",
+    productionTime: {
+      title: "Production Time",
       data: [
-        { label: "Twitter", value: "@johndoe" },
-        { label: "GitHub", value: "github.com/johndoe" },
-        { label: "Website", value: "johndoe.com" }
+        { label: "Production Time", value: "10 days" },
+        { label: "Production Date", value: "2025-01-01" },
+        { label: "Production Status", value: "In Progress" }
       ]
     },
-    preferences: {
-      title: "Preferences",
+    deliveryOptions: {
+      title: "Delivery Options",
       data: [
-        { label: "Language", value: "English" },
-        { label: "Timezone", value: "Pacific Time (PT)" },
-        { label: "Theme", value: "System Default" }
+        { label: "Delivery Option", value: "Standard" },
+        { label: "Delivery Time", value: "10 days" },
+        { label: "Delivery Status", value: "In Progress" }
       ]
     }
   },
