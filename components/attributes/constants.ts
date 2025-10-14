@@ -29,9 +29,9 @@ export const TAB_DATA = {
     status: {
       title: "Ticket Status",
       data: [
-        { label: "Ticket Status", value: "Open" },
-        { label: "Ticket Priority", value: "High" },
-        { label: "Ticket Type", value: "Bug" }
+        { id: "status-1", label: "Open", value: "Open" },
+        { id: "status-2", label: "Closed", value: "Closed" },
+        { id: "status-3", label: "Delivered", value: "Delivered" }
       ]
     },
     productionTime: {
