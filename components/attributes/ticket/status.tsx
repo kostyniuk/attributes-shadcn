@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { TAB_DATA, TICKET_TABS, ATTRIBUTE_TYPES } from "../constants";
-// import { Button } from "@/components/ui/button"
-// import { Checkbox } from "@/components/ui/checkbox"
 import {
   Field,
   FieldDescription,
@@ -15,9 +13,8 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { InputWithRemove } from "@/components/ui/custom/input-with-remove"
 import { ColorPickerWithLabel } from "@/components/ui/custom/color-picker-with-label";
-
+import { Trash2 } from "lucide-react";
 interface StatusItem {
   id: string;
   label: string;
@@ -67,21 +64,24 @@ export const Status = () => {
             <FieldGroup>
                <Field>
                  {statuses.map((status) => (
-                   <div key={status.id} className="flex items-center gap-2 mb-2">
+                   <div key={status.id} className="flex items-center gap-10 mb-2">
                      <div className="flex-1">
-                       <InputWithRemove
+                       <Input
                          id={status.id}
+                         className="w-60"
                          value={status.value}
-                         onChange={(value) => value === "" ? handleRemove(status.id) : handleUpdate(status.id, value)}
+                         onChange={(e) => e.target.value === "" ? handleRemove(status.id) : handleUpdate(status.id, e.target.value)}
                        />
                      </div>
-                     <div className="flex-shrink-0">
+                     <div className="flex-1">
                        <ColorPickerWithLabel 
                          value={status.color}
                          onChange={(color) => handleColorChange(status.id, color)}
                          placeholder="#000000"
                        />
                      </div>
+                     <Trash2 className="cursor-pointer size-4 text-red-500 hover:text-red-700" onClick={() => handleRemove(status.id)}/>
+
                    </div>
                  ))}
                  <Button 
