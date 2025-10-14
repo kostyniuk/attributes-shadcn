@@ -16,11 +16,13 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { InputWithRemove } from "@/components/ui/custom/input-with-remove"
+import { ColorPickerWithLabel } from "@/components/ui/custom/color-picker-with-label";
 
 interface StatusItem {
   id: string;
   label: string;
   value: string;
+  color: string;
 }
 
 export const Status = () => {
@@ -36,7 +38,8 @@ export const Status = () => {
     const newStatus = {
       id: newId,
       label: "New Status",
-      value: ""
+      value: "",
+      color: "#000000"
     };
     setStatuses([...statuses, newStatus]);
   };
@@ -44,6 +47,12 @@ export const Status = () => {
   const handleUpdate = (id: string, newValue: string) => {
     setStatuses(statuses.map((status) => 
       status.id === id ? { ...status, value: newValue } : status
+    ));
+  };
+
+  const handleColorChange = (id: string, newColor: string) => {
+    setStatuses(statuses.map((status) => 
+      status.id === id ? { ...status, color: newColor } : status
     ));
   };
   return (
@@ -59,11 +68,20 @@ export const Status = () => {
                <Field>
                  {statuses.map((status) => (
                    <div key={status.id} className="flex items-center gap-2 mb-2">
-                     <InputWithRemove
-                       id={status.id}
-                       value={status.value}
-                       onChange={(value) => value === "" ? handleRemove(status.id) : handleUpdate(status.id, value)}
-                     />
+                     <div className="flex-1">
+                       <InputWithRemove
+                         id={status.id}
+                         value={status.value}
+                         onChange={(value) => value === "" ? handleRemove(status.id) : handleUpdate(status.id, value)}
+                       />
+                     </div>
+                     <div className="flex-shrink-0">
+                       <ColorPickerWithLabel 
+                         value={status.color}
+                         onChange={(color) => handleColorChange(status.id, color)}
+                         placeholder="#000000"
+                       />
+                     </div>
                    </div>
                  ))}
                  <Button 
