@@ -690,15 +690,22 @@ function ColorPickerRootImpl(props: ColorPickerRootImplProps) {
 
   const isFormControl = formTrigger ? !!formTrigger.closest("form") : true;
 
-  // React.useEffect(() => {
-  //   if (valueProp !== undefined) {
-  //     const currentState = store.getState();
-  //     const color = hexToRgb(valueProp, currentState.color.a);
-  //     const hsv = rgbToHsv(color);
-  //     store.setColor(color);
-  //     store.setHsv(hsv);
-  //   }
-  // }, [valueProp, store]);
+  React.useEffect(() => {
+    if (valueProp !== undefined) {
+      const currentState = store.getState();
+      const color = hexToRgb(valueProp, currentState.color.a);
+      const hsv = rgbToHsv(color);
+      
+      // Only update if the color has actually changed to prevent infinite loops
+      const currentColorHex = rgbToHex(currentState.color);
+      const newColorHex = rgbToHex(color);
+      
+      if (currentColorHex !== newColorHex) {
+        store.setColor(color);
+        store.setHsv(hsv);
+      }
+    }
+  }, [valueProp]);
 
   // React.useEffect(() => {
   //   if (openProp !== undefined) {

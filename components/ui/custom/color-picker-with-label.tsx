@@ -1,6 +1,12 @@
 "use client";
 
 import {
+    InputGroup,
+    InputGroupAddon,
+    InputGroupInput,
+  } from "@/components/ui/input-group"
+
+import {
     ColorPicker,
     ColorPickerAlphaSlider,
     ColorPickerArea,
@@ -12,7 +18,6 @@ import {
     ColorPickerSwatch,
     ColorPickerTrigger,
   } from "@/components/ui/color-picker";
-import { Input } from "@/components/ui/input";
 
 interface ColorPickerWithLabelProps {
   value: string;
@@ -27,29 +32,27 @@ export function ColorPickerWithLabel({
 }: ColorPickerWithLabelProps) {
   return (
     <div className="flex items-center gap-2">
-      <Input
+      <InputGroup>
+        <InputGroupInput
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="w-24 h-8 text-xs"
       />
+        <InputGroupAddon>
+                #
+        </InputGroupAddon>
+      </InputGroup>
       <ColorPicker 
         defaultFormat="hex" 
         value={value}
-        onValueChange={onChange}
+        onValueChange={(val) => onChange(val.replace('#', ''))}
       >
         <ColorPickerTrigger asChild>
           <ColorPickerSwatch className="w-8 h-8" />
         </ColorPickerTrigger>
         <ColorPickerContent>
           <ColorPickerArea />
-          <div className="flex items-center gap-2">
-            <ColorPickerEyeDropper />
-            <div className="flex flex-1 flex-col gap-2">
-              <ColorPickerHueSlider />
-              <ColorPickerAlphaSlider />
-            </div>
-          </div>
           <div className="flex items-center gap-2">
             <ColorPickerFormatSelect />
             <ColorPickerInput />

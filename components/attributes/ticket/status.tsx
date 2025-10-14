@@ -39,7 +39,7 @@ export const Status = () => {
       id: newId,
       label: "New Status",
       value: "",
-      color: "#000000"
+      color: "000000"
     };
     setStatuses([...statuses, newStatus]);
   };
