@@ -22,7 +22,7 @@ interface TabComponentProps {
 }
 
 export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className }: TabComponentProps) => (
-  <Tabs className={className || "w-150"} defaultValue={defaultValue}>
+  <Tabs className={className || "w-150 min-h-screen"} defaultValue={defaultValue}>
     <TabsList>
       <TabsTrigger value={ATTRIBUTE_TYPES.TICKET}>Ticket</TabsTrigger>
       <TabsTrigger value={ATTRIBUTE_TYPES.QUOTE}>Quote</TabsTrigger>
