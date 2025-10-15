@@ -14,7 +14,7 @@ import { Copy, Trash2 } from "lucide-react";
 import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupText } from "@/components/ui/input-group";
 
 type ProductionTimeItem = {
-  id: string;
+  id: number;
   name: string;
   days: number;
 }
@@ -24,12 +24,12 @@ export const ProductionTime = () => {
 
   const [productionTimes, setProductionTimes] = useState<ProductionTimeItem[]>([...data] as ProductionTimeItem[]);
 
-  const handleRemove = (id: string) => {
+  const handleRemove = (id: number) => {
     setProductionTimes(productionTimes.filter((productionTime) => productionTime.id !== id));
   };
 
   const handleAdd = () => {
-    const newId = `status-${Date.now()}`;
+    const newId = Date.now();
     const newProductionTime = {
       id: newId,
       name: "",
@@ -38,19 +38,19 @@ export const ProductionTime = () => {
     setProductionTimes([...productionTimes, newProductionTime]);
   };
 
-  const handleUpdate = (id: string, newValue: number) => {
+  const handleUpdate = (id: number, newValue: number) => {
     setProductionTimes(productionTimes.map((productionTime) =>
       productionTime.id === id ? { ...productionTime, days: newValue } : productionTime
     ));
   };
 
-  const handleNameUpdate = (id: string, newLabel: string) => {
+  const handleNameUpdate = (id: number, newLabel: string) => {
     setProductionTimes(productionTimes.map((productionTime) =>
       productionTime.id === id ? { ...productionTime, name: newLabel } : productionTime
     ));
   };
 
-  const handleCopy = (id: string) => {
+  const handleCopy = (id: number) => {
     console.log(productionTimes.find((productionTime) => productionTime.id === id));
   };
 
