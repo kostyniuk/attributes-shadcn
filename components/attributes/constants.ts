@@ -29,9 +29,9 @@ export const TAB_DATA = {
     status: {
       title: "Ticket Status",
       data: [
-        { id: "status-1", label: "Open", value: "Open", color: "22c55e" },
-        { id: "status-2", label: "Closed", value: "Closed", color: "ef4444" },
-        { id: "status-3", label: "Delivered", value: "Delivered", color: "3b82f6" }
+        { id: "status-1", label: "Open", value: "Open", color: "878358" },
+        { id: "status-2", label: "Closed", value: "Closed", color: "eee" },
+        { id: "status-3", label: "Delivered", value: "Delivered", color: "064ec2" }
       ]
     },
     productionTime: {
