@@ -37,9 +37,8 @@ export const TAB_DATA = {
     productionTime: {
       title: "Production Time",
       data: [
-        { label: "Production Time", value: "10 days" },
-        { label: "Production Date", value: "2025-01-01" },
-        { label: "Production Status", value: "In Progress" }
+        { id: 1,name: "2 weeks", days: 10 },
+        { id: 2,name: "3 days", days: 3 },
       ]
     },
     deliveryOptions: {

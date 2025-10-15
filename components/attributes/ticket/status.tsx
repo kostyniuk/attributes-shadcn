@@ -54,7 +54,7 @@ export const Status = () => {
   };
   return (
     <div className="mt-4 space-y-3 rounded-md border p-4">
-            <form>
+      <form>
         <FieldGroup>
           <FieldSet>
             <FieldLegend>Ticket Status</FieldLegend>
