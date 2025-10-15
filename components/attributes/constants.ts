@@ -44,9 +44,11 @@ export const TAB_DATA = {
     deliveryOptions: {
       title: "Delivery Options",
       data: [
-        { label: "Delivery Option", value: "Standard" },
-        { label: "Delivery Time", value: "10 days" },
-        { label: "Delivery Status", value: "In Progress" }
+        { id: 1, name: "DHL", },
+        { id: 2, name: "FedEx" },
+        { id: 3, name: "UPS" },
+        { id: 4, name: "USPS" },
+        { id: 5, name: "Other" },
       ]
     }
   },
