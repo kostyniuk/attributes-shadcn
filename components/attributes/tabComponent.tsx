@@ -15,6 +15,7 @@ import { Privacy } from "./quote/Privacy";
 import { CurrentPlan } from "./part/CurrentPlan";
 import { PaymentMethod } from "./part/PaymentMethod";
 import { BillingHistory } from "./part/BillingHistory";
+import { Industries } from "./ticket/industry";
 
 interface TabComponentProps {
   defaultValue?: string;
@@ -37,6 +38,7 @@ export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className 
             <TabsTrigger value={TICKET_TABS.STATUS}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].status.title}</TabsTrigger>
             <TabsTrigger value={TICKET_TABS.PRODUCTION_TIME}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].productionTime.title}</TabsTrigger>
             <TabsTrigger value={TICKET_TABS.DELIVERY_OPTIONS}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].deliveryOptions.title}</TabsTrigger>
+            <TabsTrigger value={TICKET_TABS.INDUSTRIES}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].industries.title}</TabsTrigger>
           </TabsList>
           <TabsContent value={TICKET_TABS.STATUS}>
             <Status />
@@ -46,6 +48,9 @@ export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className 
           </TabsContent>
           <TabsContent value={TICKET_TABS.DELIVERY_OPTIONS}>
             <DeliveryOptions />
+          </TabsContent>
+          <TabsContent value={TICKET_TABS.INDUSTRIES}>
+            <Industries />
           </TabsContent>
         </Tabs>
       </div>

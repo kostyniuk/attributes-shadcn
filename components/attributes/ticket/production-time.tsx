@@ -61,7 +61,7 @@ export const ProductionTime = () => {
           <FieldSet>
             <FieldLegend>Production Time</FieldLegend>
             <FieldDescription>
-              The production time of the ticket
+              Define standard lead times for manufacturing orders
             </FieldDescription>
             <FieldGroup>
                <Field>

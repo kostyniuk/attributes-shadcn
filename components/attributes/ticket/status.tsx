@@ -59,7 +59,7 @@ export const Status = () => {
           <FieldSet>
             <FieldLegend>Ticket Status</FieldLegend>
             <FieldDescription>
-              The status of the ticket
+              Status name
             </FieldDescription>
             <FieldGroup>
                <Field>

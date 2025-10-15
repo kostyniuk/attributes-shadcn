@@ -47,7 +47,7 @@ export const DeliveryOptions = () => {
         <FieldGroup>
           <FieldSet>
             <FieldLegend>Delivery Options</FieldLegend>
-            <FieldDescription>Configure delivery-related fields for the ticket</FieldDescription>
+            <FieldDescription>Configure available shipping or pickup methods</FieldDescription>
             <FieldGroup>
               <Field>
                 {deliveryOptions.map((option) => (

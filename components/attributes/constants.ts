@@ -8,7 +8,8 @@ export const ATTRIBUTE_TYPES = {
 export const TICKET_TABS = {
   STATUS: 'status',
   PRODUCTION_TIME: 'productionTime',
-  DELIVERY_OPTIONS: 'deliveryOptions'
+  DELIVERY_OPTIONS: 'deliveryOptions',
+  INDUSTRIES: 'industries'
 } as const;
 
 export const QUOTE_TABS = {
@@ -49,6 +50,13 @@ export const TAB_DATA = {
         { id: 3, name: "UPS" },
         { id: 4, name: "USPS" },
         { id: 5, name: "Other" },
+      ]
+    },
+    industries: {
+      title: "Industries",
+      data: [
+        { id: 1, name: "Automotive" },
+        { id: 2, name: "Electronics" },
       ]
     }
   },
