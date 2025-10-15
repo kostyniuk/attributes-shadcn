@@ -70,14 +70,15 @@ export const Status = () => {
                          id={status.id}
                          className="w-60"
                          value={status.value}
-                         onChange={(e) => e.target.value === "" ? handleRemove(status.id) : handleUpdate(status.id, e.target.value)}
+                         onChange={(e) => handleUpdate(status.id, e.target.value)}
+                         placeholder="New Status"
                        />
                      </div>
                      <div className="flex-1">
                        <ColorPickerWithLabel 
                          value={status.color}
                          onChange={(color) => handleColorChange(status.id, color)}
-                         placeholder="#000000"
+                         placeholder="000000"
                        />
                      </div>
                      <Trash2 className="cursor-pointer size-4 text-red-500 hover:text-red-700" onClick={() => handleRemove(status.id)}/>

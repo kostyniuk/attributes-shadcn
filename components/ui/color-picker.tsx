@@ -56,15 +56,28 @@ interface HSVColorValue {
 }
 
 function hexToRgb(hex: string, alpha?: number): ColorValue {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: Number.parseInt(result[1] ?? "0", 16),
-        g: Number.parseInt(result[2] ?? "0", 16),
-        b: Number.parseInt(result[3] ?? "0", 16),
-        a: alpha ?? 1,
-      }
-    : { r: 0, g: 0, b: 0, a: alpha ?? 1 };
+  // Normalize and support both 3-digit and 6-digit hex, with or without '#'
+  let normalized = hex.trim().replace(/^#/, "");
+
+  if (/^[a-f\d]{3}$/i.test(normalized)) {
+    // Expand short form to full form (e.g., #abc -> #aabbcc)
+    normalized = normalized
+      .split("")
+      .map((c) => c + c)
+      .join("");
+  }
+
+  const match = /^[a-f\d]{6}$/i.exec(normalized);
+  if (!match) {
+    return { r: 0, g: 0, b: 0, a: alpha ?? 1 };
+  }
+
+  return {
+    r: Number.parseInt(normalized.slice(0, 2), 16),
+    g: Number.parseInt(normalized.slice(2, 4), 16),
+    b: Number.parseInt(normalized.slice(4, 6), 16),
+    a: alpha ?? 1,
+  };
 }
 
 function rgbToHex(color: ColorValue): string {
@@ -297,6 +310,12 @@ function parseColorString(value: string): ColorValue | null {
     const hexMatch = trimmed.match(/^#([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/);
     if (hexMatch) {
       return hexToRgb(trimmed);
+    }
+  } else {
+    // Parse hex colors without # prefix
+    const hexMatch = trimmed.match(/^([a-fA-F0-9]{3}|[a-fA-F0-9]{6})$/);
+    if (hexMatch) {
+      return hexToRgb(`#${trimmed}`);
     }
   }
 
@@ -1318,9 +1337,21 @@ function HexInput(props: FormatInputProps) {
   const hexValue = rgbToHex(color);
   const alphaValue = Math.round((color?.a ?? 1) * 100);
 
+  // Keep a local draft while typing so we don't rewrite the user's input
+  const [isFocused, setIsFocused] = React.useState(false);
+  const [draft, setDraft] = React.useState<string>(hexValue);
+
+  // Keep draft in sync when color changes externally and input is not focused
+  React.useEffect(() => {
+    if (!isFocused) {
+      setDraft(hexValue);
+    }
+  }, [hexValue, isFocused]);
+
   const onHexChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const value = event.target.value;
+      setDraft(value);
       const parsedColor = parseColorString(value);
       if (parsedColor) {
         onColorChange({ ...parsedColor, a: color?.a ?? 1 });
@@ -1328,6 +1359,20 @@ function HexInput(props: FormatInputProps) {
     },
     [color, onColorChange],
   );
+
+  const onHexFocus = React.useCallback(() => {
+    setIsFocused(true);
+    setDraft(hexValue);
+  }, [hexValue]);
+
+  const onHexBlur = React.useCallback(() => {
+    setIsFocused(false);
+    // If the draft is not a valid color string, reset to the current hexValue
+    const parsedColor = parseColorString(draft);
+    if (!parsedColor) {
+      setDraft(hexValue);
+    }
+  }, [draft, hexValue]);
 
   const onAlphaChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -1347,8 +1392,10 @@ function HexInput(props: FormatInputProps) {
         {...inputProps}
         placeholder="#000000"
         className={cn("font-mono", className)}
-        value={hexValue}
+        value={isFocused ? draft : hexValue}
         onChange={onHexChange}
+        onFocus={onHexFocus}
+        onBlur={onHexBlur}
         disabled={context.disabled}
       />
     );
@@ -1365,8 +1412,10 @@ function HexInput(props: FormatInputProps) {
         {...inputProps}
         placeholder="#000000"
         className="flex-1 font-mono"
-        value={hexValue}
+        value={isFocused ? draft : hexValue}
         onChange={onHexChange}
+        onFocus={onHexFocus}
+        onBlur={onHexBlur}
         disabled={context.disabled}
       />
       <InputGroupItem
