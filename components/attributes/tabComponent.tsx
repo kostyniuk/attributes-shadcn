@@ -16,6 +16,8 @@ import { CurrentPlan } from "./part/CurrentPlan";
 import { PaymentMethod } from "./part/PaymentMethod";
 import { BillingHistory } from "./part/BillingHistory";
 import { Industries } from "./ticket/industry";
+import { VatRates } from "./ticket/vat-rates";
+import { ValidUntil } from "./ticket/valid-until";
 
 interface TabComponentProps {
   defaultValue?: string;
@@ -23,13 +25,12 @@ interface TabComponentProps {
 }
 
 export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className }: TabComponentProps) => (
-  <Tabs className={className || "w-150 min-h-screen"} defaultValue={defaultValue}>
+  <Tabs className={className || "w-180 min-h-screen"} defaultValue={defaultValue}>
     <TabsList>
       <TabsTrigger value={ATTRIBUTE_TYPES.TICKET}>Ticket</TabsTrigger>
       <TabsTrigger value={ATTRIBUTE_TYPES.QUOTE}>Quote</TabsTrigger>
       <TabsTrigger value={ATTRIBUTE_TYPES.PART}>Part</TabsTrigger>
     </TabsList>
-    
     <TabsContent value={ATTRIBUTE_TYPES.TICKET}>
       <div className="rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
         <h3 className="mb-4 font-semibold text-lg">Ticket</h3>
@@ -39,6 +40,8 @@ export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className 
             <TabsTrigger value={TICKET_TABS.PRODUCTION_TIME}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].productionTime.title}</TabsTrigger>
             <TabsTrigger value={TICKET_TABS.DELIVERY_OPTIONS}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].deliveryOptions.title}</TabsTrigger>
             <TabsTrigger value={TICKET_TABS.INDUSTRIES}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].industries.title}</TabsTrigger>
+            <TabsTrigger value={TICKET_TABS.VAT_RATES}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].vatRates.title}</TabsTrigger>
+            <TabsTrigger value={TICKET_TABS.VALID_UNTIL}>{TAB_DATA[ATTRIBUTE_TYPES.TICKET].validUntil.title}</TabsTrigger>
           </TabsList>
           <TabsContent value={TICKET_TABS.STATUS}>
             <Status />
@@ -52,10 +55,16 @@ export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className 
           <TabsContent value={TICKET_TABS.INDUSTRIES}>
             <Industries />
           </TabsContent>
+          <TabsContent value={TICKET_TABS.VAT_RATES}>
+            <VatRates />
+          </TabsContent>
+          <TabsContent value={TICKET_TABS.VALID_UNTIL}>
+            <ValidUntil />
+          </TabsContent>
         </Tabs>
       </div>
     </TabsContent>
-    
+
     <TabsContent value={ATTRIBUTE_TYPES.QUOTE}>
       <div className="rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
         <h3 className="mb-4 font-semibold text-lg">Quote</h3>
@@ -77,7 +86,7 @@ export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className 
         </Tabs>
       </div>
     </TabsContent>
-    
+
     <TabsContent value={ATTRIBUTE_TYPES.PART}>
       <div className="rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
         <h3 className="mb-4 font-semibold text-lg">Part</h3>

@@ -21,9 +21,9 @@ type ProductionTimeItem = {
 
 export const ProductionTime = () => {
   const data = TAB_DATA[ATTRIBUTE_TYPES.TICKET].productionTime.data;
-  
+
   const [productionTimes, setProductionTimes] = useState<ProductionTimeItem[]>([...data] as ProductionTimeItem[]);
-  
+
   const handleRemove = (id: string) => {
     setProductionTimes(productionTimes.filter((productionTime) => productionTime.id !== id));
   };
@@ -39,13 +39,13 @@ export const ProductionTime = () => {
   };
 
   const handleUpdate = (id: string, newValue: number) => {
-    setProductionTimes(productionTimes.map((productionTime) => 
+    setProductionTimes(productionTimes.map((productionTime) =>
       productionTime.id === id ? { ...productionTime, days: newValue } : productionTime
     ));
   };
 
   const handleNameUpdate = (id: string, newLabel: string) => {
-    setProductionTimes(productionTimes.map((productionTime) => 
+    setProductionTimes(productionTimes.map((productionTime) =>
       productionTime.id === id ? { ...productionTime, name: newLabel } : productionTime
     ));
   };
@@ -64,53 +64,53 @@ export const ProductionTime = () => {
               Define standard lead times for manufacturing orders
             </FieldDescription>
             <FieldGroup>
-               <Field>
-                 {productionTimes.map((productionTime) => (
-                     <div key={productionTime.id} className="flex items-center gap-10 mb-2">
-                       <Input
-                         id={`name-${productionTime.id}`}
-                         className="w-48"
-                         value={productionTime.name}
-                         onChange={(e) => handleNameUpdate(productionTime.id, e.target.value)}
-                         placeholder="Production Time"
-                       />
-                       <InputGroup className="w-28">
-                       <InputGroupInput
-                         id={`days-${productionTime.id}`}
-                         className="w-full"
-                         value={productionTime.days}
-                         type="number"
-                         onChange={(e) => handleUpdate(productionTime.id, Number(e.target.value))}
-                         placeholder="Production Time Days"
-                         min={0}
-                       />
-                        <InputGroupAddon align="inline-end">
-                          <InputGroupText>Days</InputGroupText>
-                        </InputGroupAddon>
-                       </InputGroup>
-                       <Copy 
-                         className="cursor-pointer size-4 text-blue-600 hover:text-blue-700" 
-                         onClick={() => handleCopy(productionTime.id)}
-                       />
-                     <Trash2 
-                       className="cursor-pointer size-4 text-red-500 hover:text-red-700" 
-                       onClick={() => handleRemove(productionTime.id)}
-                     />
-                   </div>
-                 ))}
-                 <Button 
-                   type="button" 
-                   variant="default"
-                   size="sm"
-                   onClick={handleAdd}
-                   className="mt-2 max-w-36"
-                 >
-                   Add Production Time
-                 </Button>
-               </Field>
+              <Field>
+                {productionTimes.map((productionTime) => (
+                  <div key={productionTime.id} className="flex items-center gap-10 mb-2">
+                    <Input
+                      id={`name-${productionTime.id}`}
+                      className="w-48"
+                      value={productionTime.name}
+                      onChange={(e) => handleNameUpdate(productionTime.id, e.target.value)}
+                      placeholder="Production Time"
+                    />
+                    <InputGroup className="w-28">
+                      <InputGroupInput
+                        id={`days-${productionTime.id}`}
+                        className="w-full"
+                        value={productionTime.days}
+                        type="number"
+                        onChange={(e) => handleUpdate(productionTime.id, Number(e.target.value))}
+                        placeholder="Production Time Days"
+                        min={0}
+                      />
+                      <InputGroupAddon align="inline-end">
+                        <InputGroupText>Days</InputGroupText>
+                      </InputGroupAddon>
+                    </InputGroup>
+                    <Copy
+                      className="cursor-pointer size-4 text-blue-600 hover:text-blue-700"
+                      onClick={() => handleCopy(productionTime.id)}
+                    />
+                    <Trash2
+                      className="cursor-pointer size-4 text-red-500 hover:text-red-700"
+                      onClick={() => handleRemove(productionTime.id)}
+                    />
+                  </div>
+                ))}
+              </Field>
             </FieldGroup>
           </FieldSet>
         </FieldGroup>
+        <Button
+          type="button"
+          variant="default"
+          size="sm"
+          onClick={handleAdd}
+          className="mt-2 w-fit"
+        >
+          Add Production Time
+        </Button>
       </form>
     </div>
   );

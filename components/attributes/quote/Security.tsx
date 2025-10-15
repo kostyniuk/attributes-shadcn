@@ -2,7 +2,7 @@ import { TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 
 export const Security = () => {
   const data = TAB_DATA[ATTRIBUTE_TYPES.QUOTE].security.data;
-  
+
   return (
     <div className="mt-4 space-y-3 rounded-md border p-4">
       {data.map((item, index) => (

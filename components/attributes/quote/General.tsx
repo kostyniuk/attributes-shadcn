@@ -2,7 +2,7 @@ import { TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 
 export const General = () => {
   const data = TAB_DATA[ATTRIBUTE_TYPES.QUOTE].general.data;
-  
+
   return (
     <div className="mt-4 space-y-3 rounded-md border p-4">
       {data.map((item, index) => (

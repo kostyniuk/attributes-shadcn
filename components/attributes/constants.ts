@@ -9,7 +9,9 @@ export const TICKET_TABS = {
   STATUS: 'status',
   PRODUCTION_TIME: 'productionTime',
   DELIVERY_OPTIONS: 'deliveryOptions',
-  INDUSTRIES: 'industries'
+  INDUSTRIES: 'industries',
+  VAT_RATES: 'vatRates',
+  VALID_UNTIL: 'validUntil'
 } as const;
 
 export const QUOTE_TABS = {
@@ -57,6 +59,20 @@ export const TAB_DATA = {
       data: [
         { id: 1, name: "Automotive" },
         { id: 2, name: "Electronics" },
+      ]
+    },
+    vatRates: {
+      title: "Vat Rates",
+      data: [
+        { id: 1, value: "20" },
+        { id: 2, value: "10" },
+      ]
+    },
+    validUntil: {
+      title: "Valid Until",
+      data: [
+        { id: 1, name: "2 weeks", days: 10 },
+        { id: 2, name: "3 days", days: 3 },
       ]
     }
   },

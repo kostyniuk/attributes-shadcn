@@ -65,19 +65,19 @@ export const DeliveryOptions = () => {
                     />
                   </div>
                 ))}
-                <Button
-                  type="button"
-                  variant="default"
-                  size="sm"
-                  onClick={handleAdd}
-                  className="mt-2 max-w-36"
-                >
-                  Add Delivery Option
-                </Button>
               </Field>
             </FieldGroup>
           </FieldSet>
         </FieldGroup>
+        <Button
+          type="button"
+          variant="default"
+          size="sm"
+          onClick={handleAdd}
+          className="mt-2 w-fit"
+        >
+          Add Delivery Option
+        </Button>
       </form>
     </div>
   );
