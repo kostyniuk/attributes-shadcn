@@ -49,7 +49,7 @@ export default function SimpleForm() {
                         </div>
                     );
                 }} />
-                <Button variant="default" type="submit" className="w-32 mt-4" onClick={() => form.handleSubmit()}>Submit</Button>
+                <Button variant="default" type="submit" className="w-32 mt-4">Submit</Button>
             </form>
         </div>
     );
