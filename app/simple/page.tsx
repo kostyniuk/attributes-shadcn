@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { FieldLabel } from "@/components/ui/field";
+import { FieldError, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner"
@@ -41,14 +41,27 @@ export default function SimpleForm() {
                 e.preventDefault();
                 form.handleSubmit();
             }}>
-                <form.Field name="name" children={(field) => {
-                    return (
-                        <div className="flex flex-col gap-2 w-32">
-                            <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                            <Input type="text" id={field.name} value={field.state.value} onChange={(e) => field.handleChange(e.target.value)} />
-                        </div>
-                    );
-                }} />
+                <form.Field
+                    name="name"
+                    validators={{
+                        onChange: ({ value }) =>
+                            value.length < 3 ? 'Name must be at least 3 characters long' : undefined,
+                    }}
+                    children={(field) => {
+                        return (
+                            <div className="flex flex-col gap-2 w-64">
+                                <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                                <Input
+                                    type="text"
+                                    id={field.name}
+                                    value={field.state.value}
+                                    onChange={(e) => field.handleChange(e.target.value)}
+                                    placeholder="Name"
+                                />
+                                <FieldError>{field.state.meta.errors.join(',')}</FieldError>
+                            </div>
+                        );
+                    }} />
                 <Button variant="default" type="submit" className="w-32 mt-4">Submit</Button>
             </form>
         </div>
