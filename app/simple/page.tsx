@@ -1,18 +1,25 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { FieldError, FieldLabel } from "@/components/ui/field";
+import { FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner"
+import { z } from "zod";
 
 type User = {
-    name: string;
+    name: string,
+    email: string;
 }
+
+const userSchema = z.object({
+    name: z.string().min(3, 'Name must be at least 3 characters long'),
+    email: z.string().email('Invalid email address'),
+})
 
 export default function SimpleForm() {
 
-    const defaultUser: User = { name: "" };
+    const defaultUser: User = { name: "", email: "" };
 
     const form = useForm({
         defaultValues: defaultUser,
@@ -36,6 +43,9 @@ export default function SimpleForm() {
                 } as React.CSSProperties,
             })
         },
+        validators: {
+            onChange: userSchema,
+        },
     });
 
     return (
@@ -45,28 +55,50 @@ export default function SimpleForm() {
                 e.preventDefault();
                 form.handleSubmit();
             }}>
-                <form.Field
-                    name="name"
-                    validators={{
-                        onChange: ({ value }) =>
-                            value.length < 3 ? 'Name must be at least 3 characters long' : undefined,
-                    }}
-                    children={(field) => {
-                        return (
-                            <div className="flex flex-col gap-2 w-64">
-                                <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                                <Input
-                                    type="text"
-                                    id={field.name}
-                                    value={field.state.value}
-                                    onChange={(e) => field.handleChange(e.target.value)}
-                                    placeholder="Name"
-                                />
-                                <FieldError>{field.state.meta.errors.join(',')}</FieldError>
-                            </div>
-                        );
-                    }} />
-                <Button variant="default" type="submit" className="w-32 mt-4">Submit</Button>
+                <FieldGroup>
+                    <form.Field
+                        name="name"
+                        children={(field) => {
+                            return (
+                                <div className="flex flex-col gap-2 w-64">
+                                    <FieldLabel htmlFor={field.name}>Name</FieldLabel>
+                                    <Input
+                                        type="text"
+                                        id={field.name}
+                                        value={field.state.value}
+                                        onChange={(e) => field.handleChange(e.target.value)}
+                                        placeholder="Name"
+                                    />
+                                    {!field.state.meta.isPristine && <FieldError errors={field.state.meta.errors as Array<{ message?: string } | undefined>} />}
+                                </div>
+                            );
+                        }} />
+                    <form.Field
+                        name="email"
+                        children={(field) => {
+                            return (
+                                <div className="flex flex-col gap-2 w-64">
+                                    <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                                    <Input
+                                        type="email"
+                                        id={field.name}
+                                        value={field.state.value}
+                                        onChange={(e) => field.handleChange(e.target.value)}
+                                        placeholder="Email"
+                                    />
+                                    {!field.state.meta.isPristine && <FieldError errors={field.state.meta.errors as Array<{ message?: string } | undefined>} />}
+                                </div>
+                            );
+                        }} />
+                </FieldGroup>
+                <Button
+                    variant={form.state.errors.length > 0 ? "outline" : "default"}
+                    type="submit"
+                    disabled={form.state.errors.length > 0}
+                    className="w-32 mt-4"
+                >
+                    Submit
+                </Button>
             </form>
         </div>
     );
