@@ -16,7 +16,11 @@ export default function SimpleForm() {
 
     const form = useForm({
         defaultValues: defaultUser,
+        onSubmitInvalid: (formState) => {
+            console.warn("Form is invalid", formState);
+        },
         onSubmit: (value) => {
+            console.log(value.value);
             toast("You submitted the following values:", {
                 description: (
                     <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
