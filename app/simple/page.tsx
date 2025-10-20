@@ -31,9 +31,6 @@ export default function SimpleForm() {
         },
     });
 
-    const errors = useStore(form.store, (state) => state.errors);
-    const hasErrors = Object.keys(errors).length > 0;
-
     return (
         <div className="flex flex-col gap-4 p-4 max-w-md mx-auto h-screen items-center justify-center">
             <h1>Simple Form</h1>
@@ -77,14 +74,18 @@ export default function SimpleForm() {
                             );
                         }} />
                 </FieldGroup>
-                <Button
-                    variant={hasErrors ? "outline" : "default"}
-                    type="submit"
-                    disabled={hasErrors}
-                    className="w-32 mt-4"
-                >
-                    Submit
-                </Button>
+                <form.Subscribe selector={(state) => [state.canSubmit]}>
+                    {([canSubmit]) => (
+                        <Button
+                            variant={canSubmit ? "default" : "outline"}
+                            type="submit"
+                            disabled={!canSubmit}
+                            className="w-32 mt-4"
+                        >
+                            Submit
+                        </Button>
+                    )}
+                </form.Subscribe>
             </form>
         </div>
     );
