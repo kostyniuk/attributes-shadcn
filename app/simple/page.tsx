@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { useForm } from "@tanstack/react-form";
+import { useForm, useStore } from "@tanstack/react-form";
 import { toast } from "sonner"
 import { z } from "zod";
 import { codeToast } from "./helper";
@@ -31,8 +31,11 @@ export default function SimpleForm() {
         },
     });
 
+    const errors = useStore(form.store, (state) => state.errors);
+    const hasErrors = Object.keys(errors).length > 0;
+
     return (
-        <div className="flex flex-col gap-4 p-4">
+        <div className="flex flex-col gap-4 p-4 max-w-md mx-auto h-screen items-center justify-center">
             <h1>Simple Form</h1>
             <form onSubmit={(e) => {
                 e.preventDefault();
@@ -75,9 +78,9 @@ export default function SimpleForm() {
                         }} />
                 </FieldGroup>
                 <Button
-                    variant={form.state.errors.length > 0 ? "outline" : "default"}
+                    variant={hasErrors ? "outline" : "default"}
                     type="submit"
-                    disabled={form.state.errors.length > 0}
+                    disabled={hasErrors}
                     className="w-32 mt-4"
                 >
                     Submit
