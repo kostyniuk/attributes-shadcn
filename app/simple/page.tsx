@@ -6,11 +6,7 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner"
 import { z } from "zod";
-
-type User = {
-    name: string,
-    email: string;
-}
+import { codeToast } from "./helper";
 
 const userSchema = z.object({
     name: z.string().min(3, 'Name must be at least 3 characters long'),
@@ -19,8 +15,7 @@ const userSchema = z.object({
 
 export default function SimpleForm() {
 
-    const defaultUser: User = { name: "", email: "" };
-
+    const defaultUser: z.infer<typeof userSchema> = { name: "", email: "" };
     const form = useForm({
         defaultValues: defaultUser,
         onSubmitInvalid: (formState) => {
@@ -28,20 +23,8 @@ export default function SimpleForm() {
         },
         onSubmit: (value) => {
             console.log(value.value);
-            toast("You submitted the following values:", {
-                description: (
-                    <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
-                        <code>{JSON.stringify(value.value, null, 2)}</code>
-                    </pre>
-                ),
-                position: "bottom-right",
-                classNames: {
-                    content: "flex flex-col gap-2",
-                },
-                style: {
-                    "--border-radius": "calc(var(--radius)  + 4px)",
-                } as React.CSSProperties,
-            })
+            toast("You submitted the following values:", codeToast(value.value));
+            form.reset();
         },
         validators: {
             onChange: userSchema,
@@ -69,7 +52,7 @@ export default function SimpleForm() {
                                         onChange={(e) => field.handleChange(e.target.value)}
                                         placeholder="Name"
                                     />
-                                    {!field.state.meta.isPristine && <FieldError errors={field.state.meta.errors as Array<{ message?: string } | undefined>} />}
+                                    {!field.state.meta.isPristine && <FieldError errors={field.state.meta.errors} />}
                                 </div>
                             );
                         }} />
