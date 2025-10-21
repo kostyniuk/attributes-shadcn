@@ -74,9 +74,9 @@ export default function SimpleForm() {
                             );
                         }} />
                 </FieldGroup>
-                <form.Subscribe selector={(state) => [state.canSubmit, state.isTouched]}>
-                    {([canSubmit, isTouched]) => {
-                        const isDisabled = !canSubmit || !isTouched;
+                <form.Subscribe selector={(state) => [state.canSubmit, state.isPristine]}>
+                    {([canSubmit, isPristine]) => {
+                        const isDisabled = !canSubmit || isPristine;
                         return (
                             <Button
                                 variant={isDisabled ? "outline" : "default"}
