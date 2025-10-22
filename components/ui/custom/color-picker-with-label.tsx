@@ -23,14 +23,13 @@ interface ColorPickerWithLabelProps {
   placeholder?: string;
 }
 
+const isValidHex = (val: string) => /^[a-fA-F0-9]{6}$/.test(val);
+
 export function ColorPickerWithLabel({
   value,
   onChange,
   placeholder = "000000"
 }: ColorPickerWithLabelProps) {
-  // Validate hex (3 or 6 chars)
-  const isValidHex = (val: string) => /^[a-fA-F0-9]{3}$|^[a-fA-F0-9]{6}$/.test(val);
-
   // Track last valid color (stored without '#') to avoid resetting to black while typing
   const [lastValid, setLastValid] = React.useState<string>(() => (isValidHex(value) ? value : "000000"));
   const [isTyping, setIsTyping] = React.useState<boolean>(false);
@@ -46,10 +45,8 @@ export function ColorPickerWithLabel({
   const colorPickerValue = `#${isValidHex(value) ? value : lastValid}`;
 
   const handleInputChange = (inputValue: string) => {
-    // Remove # if user types it, store without #
     const cleanValue = inputValue.replace('#', '');
     onChange(cleanValue);
-    // Update last valid if input becomes valid
     if (isValidHex(cleanValue)) {
       setLastValid(cleanValue);
     }
