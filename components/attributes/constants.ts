@@ -2,7 +2,11 @@
 export const ATTRIBUTE_TYPES = {
   TICKET: 'ticket',
   QUOTE: 'quote',
-  PART: 'part'
+  PART: 'part',
+  ITEM: 'item',
+  JOB: 'job',
+  PARCEL: 'parcel',
+  CUSTOMER: 'customer'
 } as const;
 
 export const TICKET_TABS = {
