@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { TAB_DATA, TICKET_TABS, ATTRIBUTE_TYPES } from "../constants";
+import { TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 import {
   Field,
   FieldDescription,
   FieldGroup,
-  FieldLabel,
   FieldLegend,
-  FieldSeparator,
   FieldSet,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"

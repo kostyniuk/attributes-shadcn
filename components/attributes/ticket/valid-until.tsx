@@ -50,9 +50,6 @@ export const ValidUntil = () => {
     ));
   };
 
-  const handleCopy = (id: number) => {
-    console.log(validUntil.find((validUntil) => validUntil.id === id));
-  };
 
   return (
     <div className="mt-4 space-y-3 rounded-md border p-4">

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { useForm, useStore } from "@tanstack/react-form";
+import { useForm } from "@tanstack/react-form";
 import { toast } from "sonner"
 import { z } from "zod";
 import { codeToast } from "./helper";
@@ -39,9 +39,8 @@ export default function SimpleForm() {
                 form.handleSubmit();
             }}>
                 <FieldGroup>
-                    <form.Field
-                        name="name"
-                        children={(field) => {
+                    <form.Field name="name">
+                        {(field) => {
                             return (
                                 <div className="flex flex-col gap-2 w-64">
                                     <FieldLabel htmlFor={field.name}>Name</FieldLabel>
@@ -55,10 +54,10 @@ export default function SimpleForm() {
                                     {!field.state.meta.isPristine && <FieldError errors={field.state.meta.errors} />}
                                 </div>
                             );
-                        }} />
-                    <form.Field
-                        name="email"
-                        children={(field) => {
+                        }}
+                    </form.Field>
+                    <form.Field name="email">
+                        {(field) => {
                             return (
                                 <div className="flex flex-col gap-2 w-64">
                                     <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -72,7 +71,8 @@ export default function SimpleForm() {
                                     {!field.state.meta.isPristine && <FieldError errors={field.state.meta.errors as Array<{ message?: string } | undefined>} />}
                                 </div>
                             );
-                        }} />
+                        }}
+                    </form.Field>
                 </FieldGroup>
                 <form.Subscribe selector={(state) => [state.canSubmit, state.isPristine]}>
                     {([canSubmit, isPristine]) => {

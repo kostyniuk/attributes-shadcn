@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 import {
   Field,
@@ -73,7 +73,8 @@ export const Industries = () => {
                       <form.Field
                         key={index}
                         name={`industries[${index}].name`}
-                        children={(subField) => {
+                      >
+                        {(subField) => {
                           const isSubFieldInvalid =
                             subField.state.meta.isTouched &&
                             !subField.state.meta.isValid
@@ -104,7 +105,7 @@ export const Industries = () => {
                             </Field>
                           )
                         }}
-                      />
+                      </form.Field>
                     ))}
                     <Button
                       type="button"

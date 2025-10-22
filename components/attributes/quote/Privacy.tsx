@@ -1,4 +1,4 @@
-import { TAB_DATA, QUOTE_TABS, ATTRIBUTE_TYPES } from "../constants";
+import { TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 
 export const Privacy = () => {
   const data = TAB_DATA[ATTRIBUTE_TYPES.QUOTE].privacy.data;
