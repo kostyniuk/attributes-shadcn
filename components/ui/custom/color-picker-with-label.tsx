@@ -1,24 +1,24 @@
 "use client";
 
 import {
-    InputGroup,
-    InputGroupAddon,
-    InputGroupInput,
-  } from "@/components/ui/input-group"
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from "@/components/ui/input-group"
 import React from "react";
 
 import {
-    ColorPicker,
-    ColorPickerAlphaSlider,
-    ColorPickerArea,
-    ColorPickerContent,
-    ColorPickerEyeDropper,
-    ColorPickerFormatSelect,
-    ColorPickerHueSlider,
-    ColorPickerInput,
-    ColorPickerSwatch,
-    ColorPickerTrigger,
-  } from "@/components/ui/color-picker";
+  ColorPicker,
+  ColorPickerAlphaSlider,
+  ColorPickerArea,
+  ColorPickerContent,
+  ColorPickerEyeDropper,
+  ColorPickerFormatSelect,
+  ColorPickerHueSlider,
+  ColorPickerInput,
+  ColorPickerSwatch,
+  ColorPickerTrigger,
+} from "@/components/ui/color-picker";
 
 interface ColorPickerWithLabelProps {
   value: string;
@@ -26,10 +26,10 @@ interface ColorPickerWithLabelProps {
   placeholder?: string;
 }
 
-export function ColorPickerWithLabel({ 
-  value, 
+export function ColorPickerWithLabel({
+  value,
   onChange,
-  placeholder = "000000" 
+  placeholder = "000000"
 }: ColorPickerWithLabelProps) {
   // Validate hex (3 or 6 chars)
   const isValidHex = (val: string) => /^[a-fA-F0-9]{3}$|^[a-fA-F0-9]{6}$/.test(val);
@@ -47,7 +47,7 @@ export function ColorPickerWithLabel({
 
   // Ensure value passed to ColorPicker is always valid with '#'
   const colorPickerValue = `#${isValidHex(value) ? value : lastValid}`;
-  
+
   const handleInputChange = (inputValue: string) => {
     // Remove # if user types it, store without #
     const cleanValue = inputValue.replace('#', '');
@@ -57,7 +57,7 @@ export function ColorPickerWithLabel({
       setLastValid(cleanValue);
     }
   };
-  
+
   const handleColorPickerChange = (colorValue: string) => {
     // Color picker returns value with #, remove it for storage
     const cleanValue = colorValue.replace('#', '');
@@ -74,19 +74,19 @@ export function ColorPickerWithLabel({
     <div className="flex items-center gap-2">
       <InputGroup>
         <InputGroupInput
-        value={value}
-        onChange={(e) => handleInputChange(e.target.value)}
-        onFocus={() => setIsTyping(true)}
-        onBlur={() => setIsTyping(false)}
-        placeholder={placeholder}
-        className="w-24 h-8 text-xs"
-      />
+          value={value}
+          onChange={(e) => handleInputChange(e.target.value)}
+          onFocus={() => setIsTyping(true)}
+          onBlur={() => setIsTyping(false)}
+          placeholder={placeholder}
+          className="w-24 h-8 text-xs"
+        />
         <InputGroupAddon>
-                #
+          #
         </InputGroupAddon>
       </InputGroup>
-      <ColorPicker 
-        defaultFormat="hex" 
+      <ColorPicker
+        defaultFormat="hex"
         value={colorPickerValue}
         onValueChange={handleColorPickerChange}
       >
@@ -99,12 +99,7 @@ export function ColorPickerWithLabel({
             <ColorPickerEyeDropper />
             <div className="flex flex-1 flex-col gap-2">
               <ColorPickerHueSlider />
-              <ColorPickerAlphaSlider />
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <ColorPickerFormatSelect />
-            <ColorPickerInput />
           </div>
         </ColorPickerContent>
       </ColorPicker>
