@@ -9,13 +9,10 @@ import React from "react";
 
 import {
   ColorPicker,
-  ColorPickerAlphaSlider,
   ColorPickerArea,
   ColorPickerContent,
   ColorPickerEyeDropper,
-  ColorPickerFormatSelect,
   ColorPickerHueSlider,
-  ColorPickerInput,
   ColorPickerSwatch,
   ColorPickerTrigger,
 } from "@/components/ui/color-picker";
@@ -86,7 +83,6 @@ export function ColorPickerWithLabel({
         </InputGroupAddon>
       </InputGroup>
       <ColorPicker
-        defaultFormat="hex"
         value={colorPickerValue}
         onValueChange={handleColorPickerChange}
       >
