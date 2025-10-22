@@ -20,6 +20,7 @@ import {
 interface ColorPickerWithLabelProps {
   value: string;
   onChange: (value: string) => void;
+  onBlur?: () => void;
   placeholder?: string;
 }
 
@@ -28,6 +29,7 @@ const isValidHex = (val: string) => /^[a-fA-F0-9]{6}$/.test(val);
 export function ColorPickerWithLabel({
   value,
   onChange,
+  onBlur,
   placeholder = "000000"
 }: ColorPickerWithLabelProps) {
   // Track last valid color (stored without '#') to avoid resetting to black while typing
@@ -71,7 +73,12 @@ export function ColorPickerWithLabel({
           value={value}
           onChange={(e) => handleInputChange(e.target.value)}
           onFocus={() => setIsTyping(true)}
-          onBlur={() => setIsTyping(false)}
+          onBlur={() => {
+            setIsTyping(false);
+            if (onBlur) {
+              onBlur();
+            }
+          }}
           placeholder={placeholder}
           className="w-24 h-8 text-xs"
         />
@@ -82,6 +89,11 @@ export function ColorPickerWithLabel({
       <ColorPicker
         value={colorPickerValue}
         onValueChange={handleColorPickerChange}
+        onOpenChange={(open) => {
+          if (!open && onBlur) {
+            onBlur();
+          }
+        }}
       >
         <ColorPickerTrigger asChild>
           <ColorPickerSwatch className="w-8 h-8" />

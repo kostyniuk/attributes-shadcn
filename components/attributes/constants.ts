@@ -127,4 +127,4 @@ export const TAB_DATA = {
       ]
     }
   }
-} as const;
+};
