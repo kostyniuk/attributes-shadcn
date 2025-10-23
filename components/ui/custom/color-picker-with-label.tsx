@@ -22,6 +22,7 @@ interface ColorPickerWithLabelProps {
   onChange: (value: string) => void;
   onBlur?: () => void;
   placeholder?: string;
+  invalid?: boolean;
 }
 
 const isValidHex = (val: string) => /^[a-fA-F0-9]{6}$/.test(val);
@@ -30,7 +31,8 @@ export function ColorPickerWithLabel({
   value,
   onChange,
   onBlur,
-  placeholder = "000000"
+  placeholder = "000000",
+  invalid = false
 }: ColorPickerWithLabelProps) {
   // Track last valid color (stored without '#') to avoid resetting to black while typing
   const [lastValid, setLastValid] = React.useState<string>(() => (isValidHex(value) ? value : "000000"));
@@ -79,6 +81,7 @@ export function ColorPickerWithLabel({
               onBlur();
             }
           }}
+          aria-invalid={invalid}
           placeholder={placeholder}
           className="w-24 h-8 text-xs"
         />
