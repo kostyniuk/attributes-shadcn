@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 import {
   Field,
@@ -128,21 +127,33 @@ export const Status = () => {
                     })}
                     <Button
                       type="button"
-                      variant="default"
+                      variant="outline"
                       size="sm"
                       onClick={() => field.pushValue({ id: '', value: '', color: `000000` })}
-                      className="mt-2 w-fit"
+                      className="w-fit"
                     >
                       Add Status
                     </Button>
-                    <Button
-                      type="submit"
-                      variant="outline"
-                      size="sm"
-                      form="status-form"
-                    >
-                      Submit
-                    </Button>
+                    <FieldGroup className="flex-row gap-2">
+                      <Button
+                        type="submit"
+                        variant="default"
+                        size="sm"
+                        form="status-form"
+                        className="w-fit"
+                      >
+                        Submit
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => form.reset()}
+                        className="w-fit"
+                      >
+                        Reset
+                      </Button>
+                    </FieldGroup>
                   </FieldGroup>
                 </FieldSet>
               </FieldGroup>

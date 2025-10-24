@@ -22,6 +22,7 @@ export default function FormTanstackExample() {
         <form.Field
             name="hobbies"
             mode="array"
+            // eslint-disable-next-line react/no-children-prop
             children={(hobbiesField) => (
                 <div>
                     Hobbies
@@ -32,6 +33,7 @@ export default function FormTanstackExample() {
                                 <div key={i}>
                                     <form.Field
                                         name={`hobbies[${i}].name`}
+                                        // eslint-disable-next-line react/no-children-prop
                                         children={(field) => {
                                             return (
                                                 <div>
@@ -55,6 +57,7 @@ export default function FormTanstackExample() {
                                     />
                                     <form.Field
                                         name={`hobbies[${i}].description`}
+                                        // eslint-disable-next-line react/no-children-prop
                                         children={(field) => {
                                             return (
                                                 <div>
