@@ -66,7 +66,7 @@ export const Status = () => {
                     {field.state.value.map((_, i) => {
                       return (
                         <div key={i} className="flex items-center justify-between">
-                          <div key={i} className="flex items-flex-start gap-10">
+                          <div key={i} className="flex items-start gap-10">
                             <form.Field
                               key={`value-${i}`}
                               name={`statuses[${i}].value`}
@@ -78,10 +78,9 @@ export const Status = () => {
                                 const isInvalid =
                                   subField.state.meta.isTouched && !subField.state.meta.isValid
                                 return (
-                                  <Field data-invalid={isInvalid}>
+                                  <Field className="w-60" data-invalid={isInvalid}>
                                     <Input
                                       id={`status-${i}`}
-                                      className="w-60"
                                       value={subField.state.value as string}
                                       onChange={(e) => subField.handleChange((e.target.value))}
                                       placeholder="New Status"
@@ -106,7 +105,7 @@ export const Status = () => {
                                 const isInvalid =
                                   subField.state.meta.isTouched && !subField.state.meta.isValid
                                 return (
-                                  <Field data-invalid={isInvalid}>
+                                  <Field className="w-40" data-invalid={isInvalid}>
                                     <ColorPickerWithLabel
                                       value={subField.state.value as string}
                                       onChange={(color) => subField.handleChange(color)}
@@ -120,7 +119,7 @@ export const Status = () => {
                                 )
                               }}
                             </form.Field>
-                            <Trash2 className="cursor-pointer size-10 pb-[6px] text-red-500 hover:text-red-700" onClick={() => field.removeValue(i)} />
+                            <Trash2 className="cursor-pointer size-4 mt-[10px] text-red-500 hover:text-red-700" onClick={() => field.removeValue(i)} />
                           </div>
                         </div>
                       )
