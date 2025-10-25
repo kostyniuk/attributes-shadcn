@@ -3,6 +3,7 @@ import { CUSTOMER_TABS, TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 
 // Customer components
 import { Status } from "./status";
+import { Industries } from "./industries";
 
 export const CustomerTabs = () => {
     return (
@@ -23,6 +24,9 @@ export const CustomerTabs = () => {
                 </TabsList>
                 <TabsContent value={CUSTOMER_TABS.STATUS}>
                     <Status />
+                </TabsContent>
+                <TabsContent value={CUSTOMER_TABS.INDUSTRIES}>
+                    <Industries />
                 </TabsContent>
             </Tabs>
         </div>

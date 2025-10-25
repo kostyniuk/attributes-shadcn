@@ -13,7 +13,6 @@ export const TICKET_TABS = {
   STATUS: 'status',
   PRODUCTION_TIME: 'productionTime',
   DELIVERY_OPTIONS: 'deliveryOptions',
-  INDUSTRIES: 'industries',
   VAT_RATES: 'vatRates',
   VALID_UNTIL: 'validUntil'
 } as const;
@@ -33,7 +32,8 @@ export const PART_TABS = {
 } as const;
 
 export const CUSTOMER_TABS = {
-  STATUS: 'status'
+  STATUS: 'status',
+  INDUSTRIES: 'industries'
 } as const;
 
 export const ITEM_TABS = {
@@ -75,13 +75,6 @@ export const TAB_DATA = {
         { id: 3, name: "UPS" },
         { id: 4, name: "USPS" },
         { id: 5, name: "Other" },
-      ]
-    },
-    industries: {
-      title: "Industries",
-      data: [
-        { id: 1, name: "Automotive" },
-        { id: 2, name: "Electronics" },
       ]
     },
     vatRates: {
@@ -170,6 +163,21 @@ export const TAB_DATA = {
         { id: 1, value: "Active", color: "22c55e" },
         { id: 2, value: "Inactive", color: "ef4444" },
         { id: 3, value: "Pending", color: "f59e0b" }
+      ]
+    },
+    industries: {
+      title: "Industries",
+      data: [
+        { id: 1, name: "Automotive" },
+        { id: 2, name: "Electronics" },
+        { id: 3, name: "Healthcare" },
+        { id: 4, name: "Education" },
+        { id: 5, name: "Finance" },
+        { id: 6, name: "Retail" },
+        { id: 7, name: "Manufacturing" },
+        { id: 8, name: "Energy" },
+        { id: 9, name: "Technology" },
+        { id: 10, name: "Other" },
       ]
     }
   },
