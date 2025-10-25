@@ -71,6 +71,7 @@ export const ProductionTime = () => {
                               validators={{
                                 onBlur: z.string().min(1, 'Name is required'),
                               }}
+                              // eslint-disable-next-line react/no-children-prop
                               children={(subField) => {
                                 const isInvalid = subField.state.meta.isTouched && !subField.state.meta.isValid
                                 return (
@@ -97,6 +98,7 @@ export const ProductionTime = () => {
                               validators={{
                                 onBlur: z.number().min(0, 'Please provide a valid time').max(99, 'Maximum is 99'),
                               }}
+                              // eslint-disable-next-line react/no-children-prop
                               children={(subField) => {
                                 const isInvalid = subField.state.meta.isTouched && !subField.state.meta.isValid
                                 return (
