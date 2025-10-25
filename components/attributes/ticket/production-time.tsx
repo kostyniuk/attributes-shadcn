@@ -47,13 +47,12 @@ export const ProductionTime = () => {
                     {field.state.value.map((_, i) => {
                       return (
                         <div key={i} className="flex items-center justify-between">
-                          <div className="flex items-flex-start gap-10">
+                          <div className="flex items-start gap-10">
                             <form.Field name={`productionTimes[${i}].name`} // eslint-disable-next-line react/no-children-prop
                               children={(subField) => (
-                                <Field>
+                                <Field className="w-60">
                                   <Input
                                     id={`production-time-name-${i}`}
-                                    className="w-60"
                                     value={subField.state.value}
                                     onChange={(e) => subField.handleChange(e.target.value)}
                                     placeholder="Production Time"
@@ -63,8 +62,8 @@ export const ProductionTime = () => {
                             />
                             <form.Field name={`productionTimes[${i}].days`} // eslint-disable-next-line react/no-children-prop
                               children={(subField) => (
-                                <Field>
-                                  <InputGroup className="max-w-26">
+                                <Field className="w-26">
+                                  <InputGroup>
                                     <InputGroupInput
                                       id={`production-time-days-${i}`}
                                       value={subField.state.value}
@@ -81,26 +80,47 @@ export const ProductionTime = () => {
                               )}
                             />
                             <Copy
-                              className="cursor-pointer size-11 text-blue-600 hover:text-blue-700"
+                              className="cursor-pointer size-4 mt-[10px] text-blue-600 hover:text-blue-700"
                               onClick={() => { }}
                             />
-                            <Trash2 className="cursor-pointer size-11 text-red-500 hover:text-red-700" onClick={() => field.removeValue(i)} />
+                            <Trash2 className="cursor-pointer size-4 mt-[10px] text-red-500 hover:text-red-700" onClick={() => field.removeValue(i)} />
                           </div>
                         </div>
                       )
                     })}
                   </FieldGroup>
+
+                  < Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => field.pushValue({ id: 0, name: '', days: 0 })}
+                    className="w-fit"
+                  >
+                    Add Production Time
+                  </Button >
+                  <FieldGroup className="flex-row gap-2">
+                    <Button
+                      type="submit"
+                      variant="default"
+                      size="sm"
+                      form="production-time-form"
+                      className="w-fit"
+                    >
+                      Submit
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => form.reset()}
+                      className="w-fit"
+                    >
+                      Reset
+                    </Button>
+                  </FieldGroup>
                 </FieldSet>
               </FieldGroup>
-              < Button
-                type="button"
-                variant="outline"
-                size="sm"
-                onClick={() => field.pushValue({ id: 0, name: '', days: 0 })}
-                className="mt-2 w-fit"
-              >
-                Add Production Time
-              </Button >
             </div>
           )}
         />
