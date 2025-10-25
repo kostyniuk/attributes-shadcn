@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from "react";
 import { TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLegend,
   FieldSet,
@@ -11,81 +11,131 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "lucide-react";
 import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupText } from "@/components/ui/input-group";
+import { useForm } from "@tanstack/react-form";
+import { z } from "zod";
+import { toast } from "sonner";
+import { codeToast } from "@/app/simple/helper";
 
 type VatRateItem = {
-  id: number;
-  value: string;
+  id: number | null;
+  value: number;
 };
 
 export const VatRates = () => {
-  const initialData = TAB_DATA[ATTRIBUTE_TYPES.TICKET].vatRates.data;
+  const data = TAB_DATA[ATTRIBUTE_TYPES.TICKET].vatRates.data as VatRateItem[];
 
-  const [vatRates, setVatRates] = useState<VatRateItem[]>([...initialData] as VatRateItem[]);
-
-  const handleRemove = (id: number) => {
-    setVatRates(vatRates.filter((option) => option.id !== id));
-  };
-
-  const handleAdd = () => {
-    const newId = Date.now();
-    const newOption: VatRateItem = {
-      id: newId,
-      value: "",
-    };
-    setVatRates([...vatRates, newOption]);
-  };
-
-  const handleValueUpdate = (id: number, newValue: string) => {
-    setVatRates(
-      vatRates.map((option) => (option.id === id ? { ...option, value: newValue } : option))
-    );
-  };
+  const form = useForm({
+    defaultValues: {
+      vatRates: data
+    },
+    onSubmit: async ({ value }) => {
+      console.log(value);
+      toast("You submitted the following values:", codeToast(value));
+    },
+    validators: {
+      onSubmit: z.object({
+        vatRates: z.array(z.object({
+          id: z.number().nullable(),
+          value: z.number().min(0, 'Value is required').max(100, 'Value must be between 0 and 100'),
+        })),
+      }),
+    },
+  });
 
   return (
     <div className="mt-4 space-y-3 rounded-md border p-4">
-      <form>
-        <FieldGroup>
-          <FieldSet>
-            <FieldLegend>Vat Rates</FieldLegend>
-            <FieldDescription>Configure VAT rates for different countries</FieldDescription>
-            <FieldGroup>
-              <Field>
-                {vatRates.map((option) => (
-                  <div key={option.id} className="flex items-center gap-10 mb-2">
-                    <InputGroup className="w-24">
-                      <InputGroupInput
-                        id={`days-${option.id}`}
-                        className="w-full"
-                        value={option.value}
-                        type="number"
-                        onChange={(e) => handleValueUpdate(option.id, e.target.value)}
-                        placeholder="0"
-                        min={0}
-                        max={100}
-                      />
-                      <InputGroupAddon align="inline-end">
-                        <InputGroupText>%</InputGroupText>
-                      </InputGroupAddon>
-                    </InputGroup>
-                    <Trash2
-                      className="cursor-pointer size-4 text-red-500 hover:text-red-700"
-                      onClick={() => handleRemove(option.id)}
-                    />
-                  </div>
-                ))}
-              </Field>
-            </FieldGroup>
-          </FieldSet>
-        </FieldGroup>
-        <Button
-          type="button"
-          variant="default"
-          size="sm"
-          onClick={handleAdd}
-          className="mt-2 w-fit"
-        >
-          Add Vat Rate
-        </Button>
+      <form id="vat-rates-form" onSubmit={(e) => {
+        e.preventDefault();
+        form.handleSubmit();
+      }}>
+        <form.Field name="vatRates" mode="array" // eslint-disable-next-line react/no-children-prop
+          children={(field) => (
+            <div>
+              <FieldGroup>
+                <FieldSet>
+                  <FieldLegend>Vat Rates</FieldLegend>
+                  <FieldDescription>
+                    Configure VAT rates for different countries
+                  </FieldDescription>
+                  <FieldGroup>
+                    {field.state.value.map((_, i) => {
+                      return (
+                        <div key={i} className="flex items-center justify-between">
+                          <div className="flex items-start gap-10">
+                            <form.Field
+                              key={`value-${i}`}
+                              name={`vatRates[${i}].value`}
+                              validators={{
+                                onBlur: z.number().min(0, 'Value is required').max(100, 'Value must be between 0 and 100'),
+                              }}
+                              // eslint-disable-next-line react/no-children-prop
+                              children={(subField) => {
+                                const isInvalid = subField.state.meta.isTouched && !subField.state.meta.isValid
+                                return (
+                                  <Field className="w-26" data-invalid={isInvalid}>
+                                    <InputGroup>
+                                      <InputGroupInput
+                                        id={`vat-rate-${i}`}
+                                        value={subField.state.value}
+                                        type="number"
+                                        onChange={(e) => subField.handleChange(Number(e.target.value))}
+                                        placeholder="0"
+                                        min={0}
+                                        max={100}
+                                        onBlur={subField.handleBlur}
+                                        aria-invalid={isInvalid}
+                                      />
+                                      <InputGroupAddon align="inline-end">
+                                        <InputGroupText>%</InputGroupText>
+                                      </InputGroupAddon>
+                                    </InputGroup>
+                                    {isInvalid && (
+                                      <FieldError errors={subField.state.meta.errors} />
+                                    )}
+                                  </Field>
+                                )
+                              }}
+                            />
+                            <Trash2 className="cursor-pointer size-4 mt-[10px] text-red-500 hover:text-red-700" onClick={() => field.removeValue(i)} />
+                          </div>
+                        </div>
+                      )
+                    })}
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={() => field.pushValue({ id: null, value: 0 })}
+                      className="w-fit"
+                    >
+                      Add Vat Rate
+                    </Button>
+                    <FieldGroup className="flex-row gap-2">
+                      <Button
+                        type="submit"
+                        variant="default"
+                        size="sm"
+                        form="vat-rates-form"
+                        className="w-fit"
+                      >
+                        Submit
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => form.reset()}
+                        className="w-fit"
+                      >
+                        Reset
+                      </Button>
+                    </FieldGroup>
+                  </FieldGroup>
+                </FieldSet>
+              </FieldGroup>
+            </div>
+          )}
+        />
       </form>
     </div>
   );

@@ -2,10 +2,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { QUOTE_TABS, TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 
 // Quote components
-import { General } from "./general";
-import { Security } from "./security";
-import { Privacy } from "./privacy";
 import { Status } from "./status";
+import { DeliveryOptions } from "./delivery-options";
+import { ValidUntil } from "./valid-until";
 
 export const QuoteTabs = () => {
     return (
@@ -27,14 +26,11 @@ export const QuoteTabs = () => {
                 <TabsContent value={QUOTE_TABS.STATUS}>
                     <Status />
                 </TabsContent>
-                <TabsContent value={QUOTE_TABS.GENERAL}>
-                    <General />
+                <TabsContent value={QUOTE_TABS.DELIVERY_OPTIONS}>
+                    <DeliveryOptions />
                 </TabsContent>
-                <TabsContent value={QUOTE_TABS.SECURITY}>
-                    <Security />
-                </TabsContent>
-                <TabsContent value={QUOTE_TABS.PRIVACY}>
-                    <Privacy />
+                <TabsContent value={QUOTE_TABS.VALID_UNTIL}>
+                    <ValidUntil />
                 </TabsContent>
             </Tabs>
         </div>

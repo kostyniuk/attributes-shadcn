@@ -4,9 +4,7 @@ import { TICKET_TABS, TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 // Ticket components
 import { Status } from "./status";
 import { ProductionTime } from "./production-time";
-import { DeliveryOptions } from "./delivery-options";
 import { VatRates } from "./vat-rates";
-import { ValidUntil } from "./valid-until";
 
 export const TicketTabs = () => {
     return (
@@ -31,14 +29,8 @@ export const TicketTabs = () => {
                 <TabsContent value={TICKET_TABS.PRODUCTION_TIME}>
                     <ProductionTime />
                 </TabsContent>
-                <TabsContent value={TICKET_TABS.DELIVERY_OPTIONS}>
-                    <DeliveryOptions />
-                </TabsContent>
                 <TabsContent value={TICKET_TABS.VAT_RATES}>
                     <VatRates />
-                </TabsContent>
-                <TabsContent value={TICKET_TABS.VALID_UNTIL}>
-                    <ValidUntil />
                 </TabsContent>
             </Tabs>
         </div>

@@ -1,0 +1,170 @@
+"use client";
+import { TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
+import {
+    Field,
+    FieldDescription,
+    FieldError,
+    FieldGroup,
+    FieldLegend,
+    FieldSet,
+} from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Trash2 } from "lucide-react";
+import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupText } from "@/components/ui/input-group";
+import { useForm } from "@tanstack/react-form";
+import { z } from "zod";
+import { toast } from "sonner";
+import { codeToast } from "@/app/simple/helper";
+
+type ValidUntilItem = {
+    id: number | null;
+    name: string;
+    days: number;
+}
+
+export const ValidUntil = () => {
+    const data = TAB_DATA[ATTRIBUTE_TYPES.QUOTE].validUntil.data as ValidUntilItem[];
+
+    const form = useForm({
+        defaultValues: {
+            validUntil: data
+        },
+        onSubmit: async ({ value }) => {
+            console.log(value);
+            toast("You submitted the following values:", codeToast(value));
+        },
+        validators: {
+            onSubmit: z.object({
+                validUntil: z.array(z.object({
+                    id: z.number().nullable(),
+                    name: z.string().min(1, 'Name is required'),
+                    days: z.number().min(0, 'Days is required'),
+                })),
+            }),
+        },
+    });
+
+    return (
+        <div className="mt-4 space-y-3 rounded-md border p-4">
+            <form id="quote-valid-until-form" onSubmit={(e) => {
+                e.preventDefault();
+                form.handleSubmit();
+            }}>
+                <form.Field name="validUntil" mode="array" // eslint-disable-next-line react/no-children-prop
+                    children={(field) => (
+                        <div>
+                            <FieldGroup>
+                                <FieldSet>
+                                    <FieldLegend>Valid Until</FieldLegend>
+                                    <FieldDescription>
+                                        Specify the expiration date for quotes or offers
+                                    </FieldDescription>
+                                    <FieldGroup>
+                                        {field.state.value.map((_, i) => {
+                                            return (
+                                                <div key={i} className="flex items-center justify-between">
+                                                    <div className="flex items-start gap-10">
+                                                        <form.Field
+                                                            key={`name-${i}`}
+                                                            name={`validUntil[${i}].name`}
+                                                            validators={{
+                                                                onBlur: z.string().min(1, 'Name is required'),
+                                                            }}
+                                                            // eslint-disable-next-line react/no-children-prop
+                                                            children={(subField) => {
+                                                                const isInvalid = subField.state.meta.isTouched && !subField.state.meta.isValid
+                                                                return (
+                                                                    <Field className="w-60" data-invalid={isInvalid}>
+                                                                        <Input
+                                                                            id={`quote-valid-until-name-${i}`}
+                                                                            value={subField.state.value}
+                                                                            onChange={(e) => subField.handleChange(e.target.value)}
+                                                                            placeholder="Valid Until"
+                                                                            onBlur={subField.handleBlur}
+                                                                            aria-invalid={isInvalid}
+                                                                        />
+                                                                        {isInvalid && (
+                                                                            <FieldError errors={subField.state.meta.errors} />
+                                                                        )}
+                                                                    </Field>
+                                                                )
+                                                            }}
+                                                        />
+                                                        <form.Field
+                                                            key={`days-${i}`}
+                                                            name={`validUntil[${i}].days`}
+                                                            validators={{
+                                                                onBlur: z.number().min(0, 'Please provide a valid time').max(999, 'Maximum is 999'),
+                                                            }}
+                                                            // eslint-disable-next-line react/no-children-prop
+                                                            children={(subField) => {
+                                                                const isInvalid = subField.state.meta.isTouched && !subField.state.meta.isValid
+                                                                return (
+                                                                    <Field className="w-26">
+                                                                        <InputGroup>
+                                                                            <InputGroupInput
+                                                                                id={`quote-valid-until-days-${i}`}
+                                                                                value={subField.state.value}
+                                                                                type="number"
+                                                                                onChange={(e) => subField.handleChange(Number(e.target.value))}
+                                                                                placeholder="Valid Until Days"
+                                                                                min={0}
+                                                                                onBlur={subField.handleBlur}
+                                                                                aria-invalid={isInvalid}
+                                                                            />
+                                                                            <InputGroupAddon align="inline-end">
+                                                                                <InputGroupText>Days</InputGroupText>
+                                                                            </InputGroupAddon>
+                                                                        </InputGroup>
+                                                                        {isInvalid && (
+                                                                            <FieldError errors={subField.state.meta.errors} />
+                                                                        )}
+                                                                    </Field>
+                                                                )
+                                                            }}
+                                                        />
+                                                        <Trash2 className="cursor-pointer size-4 mt-[10px] text-red-500 hover:text-red-700" onClick={() => field.removeValue(i)} />
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                        <Button
+                                            type="button"
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => field.pushValue({ id: null, name: '', days: 0 })}
+                                            className="w-fit"
+                                        >
+                                            Add Valid Until
+                                        </Button>
+                                        <FieldGroup className="flex-row gap-2">
+                                            <Button
+                                                type="submit"
+                                                variant="default"
+                                                size="sm"
+                                                form="quote-valid-until-form"
+                                                className="w-fit"
+                                            >
+                                                Submit
+                                            </Button>
+                                            <Button
+                                                type="button"
+                                                variant="outline"
+                                                size="sm"
+                                                onClick={() => form.reset()}
+                                                className="w-fit"
+                                            >
+                                                Reset
+                                            </Button>
+                                        </FieldGroup>
+                                    </FieldGroup>
+                                </FieldSet>
+                            </FieldGroup>
+                        </div>
+                    )}
+                />
+            </form>
+        </div>
+    );
+};

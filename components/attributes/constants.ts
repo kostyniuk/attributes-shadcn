@@ -12,16 +12,13 @@ export const ATTRIBUTE_TYPES = {
 export const TICKET_TABS = {
   STATUS: 'status',
   PRODUCTION_TIME: 'productionTime',
-  DELIVERY_OPTIONS: 'deliveryOptions',
-  VAT_RATES: 'vatRates',
-  VALID_UNTIL: 'validUntil'
+  VAT_RATES: 'vatRates'
 } as const;
 
 export const QUOTE_TABS = {
   STATUS: 'status',
-  GENERAL: 'general',
-  SECURITY: 'security',
-  PRIVACY: 'privacy'
+  DELIVERY_OPTIONS: 'deliveryOptions',
+  VALID_UNTIL: 'validUntil'
 } as const;
 
 export const PART_TABS = {
@@ -67,6 +64,24 @@ export const TAB_DATA = {
         { id: 3,name: "1 week", days: 7 },
       ]
     },
+    vatRates: {
+      title: "Vat Rates",
+      data: [
+        { id: 1, value: 20 },
+        { id: 2, value: 10 },
+      ]
+    },
+  },
+  quote: {
+    status: {
+      title: "Quote Status",
+      data: [
+        { id: 1, value: "Draft", color: "f59e0b" },
+        { id: 2, value: "Sent", color: "3b82f6" },
+        { id: 3, value: "Accepted", color: "22c55e" },
+        { id: 4, value: "Rejected", color: "ef4444" }
+      ]
+    },
     deliveryOptions: {
       title: "Delivery Options",
       data: [
@@ -77,50 +92,11 @@ export const TAB_DATA = {
         { id: 5, name: "Other" },
       ]
     },
-    vatRates: {
-      title: "Vat Rates",
-      data: [
-        { id: 1, value: "20" },
-        { id: 2, value: "10" },
-      ]
-    },
     validUntil: {
       title: "Valid Until",
       data: [
         { id: 1, name: "2 weeks", days: 10 },
         { id: 2, name: "3 days", days: 3 },
-      ]
-    }
-  },
-  quote: {
-    general: {
-      title: "General",
-      data: [
-        { label: "Account Status", value: "Active" },
-        { label: "Member Since", value: "January 2024" }
-      ]
-    },
-    security: {
-      title: "Security",
-      data: [
-        { label: "Two-Factor Authentication", value: "Enabled" },
-        { label: "Last Password Change", value: "30 days ago" }
-      ]
-    },
-    privacy: {
-      title: "Privacy",
-      data: [
-        { label: "Profile Visibility", value: "Public" },
-        { label: "Data Sharing", value: "Disabled" }
-      ]
-    },
-    status: {
-      title: "Quote Status",
-      data: [
-        { id: 1, value: "Draft", color: "f59e0b" },
-        { id: 2, value: "Sent", color: "3b82f6" },
-        { id: 3, value: "Accepted", color: "22c55e" },
-        { id: 4, value: "Rejected", color: "ef4444" }
       ]
     }
   },
