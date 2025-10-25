@@ -5,6 +5,7 @@ import { ATTRIBUTE_TYPES } from "./constants";
 import { TicketTabs } from "./ticket";
 import { QuoteTabs } from "./quote";
 import { PartTabs } from "./part";
+import { CustomerTabs } from "./customer";
 
 interface TabComponentProps {
   defaultValue?: string;
@@ -37,6 +38,10 @@ export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className 
 
       <TabsContent value={ATTRIBUTE_TYPES.PART}>
         <PartTabs />
+      </TabsContent>
+
+      <TabsContent value={ATTRIBUTE_TYPES.CUSTOMER}>
+        <CustomerTabs />
       </TabsContent>
     </Tabs>
   );

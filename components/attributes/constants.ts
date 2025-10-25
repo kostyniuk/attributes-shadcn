@@ -30,6 +30,10 @@ export const PART_TABS = {
   HISTORY: 'history'
 } as const;
 
+export const CUSTOMER_TABS = {
+  STATUS: 'status'
+} as const;
+
 // Tab data constants
 export const TAB_DATA = {
   ticket: {
@@ -125,6 +129,16 @@ export const TAB_DATA = {
       data: [
         { label: "January 2024", value: "$29.00 - Paid" },
         { label: "December 2023", value: "$29.00 - Paid" }
+      ]
+    }
+  },
+  customer: {
+    status: {
+      title: "Customer Status",
+      data: [
+        { id: 1, value: "Active", color: "22c55e" },
+        { id: 2, value: "Inactive", color: "ef4444" },
+        { id: 3, value: "Pending", color: "f59e0b" }
       ]
     }
   }
