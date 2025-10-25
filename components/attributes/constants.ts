@@ -19,18 +19,32 @@ export const TICKET_TABS = {
 } as const;
 
 export const QUOTE_TABS = {
+  STATUS: 'status',
   GENERAL: 'general',
   SECURITY: 'security',
   PRIVACY: 'privacy'
 } as const;
 
 export const PART_TABS = {
+  STATUS: 'status',
   PLAN: 'plan',
   PAYMENT: 'payment',
-  HISTORY: 'history'
+  HISTORY: 'history',
 } as const;
 
 export const CUSTOMER_TABS = {
+  STATUS: 'status'
+} as const;
+
+export const ITEM_TABS = {
+  STATUS: 'status'
+} as const;
+
+export const PARCEL_TABS = {
+  STATUS: 'status'
+} as const;
+
+export const JOB_TABS = {
   STATUS: 'status'
 } as const;
 
@@ -106,6 +120,15 @@ export const TAB_DATA = {
         { label: "Profile Visibility", value: "Public" },
         { label: "Data Sharing", value: "Disabled" }
       ]
+    },
+    status: {
+      title: "Quote Status",
+      data: [
+        { id: 1, value: "Draft", color: "f59e0b" },
+        { id: 2, value: "Sent", color: "3b82f6" },
+        { id: 3, value: "Accepted", color: "22c55e" },
+        { id: 4, value: "Rejected", color: "ef4444" }
+      ]
     }
   },
   part: {
@@ -130,6 +153,14 @@ export const TAB_DATA = {
         { label: "January 2024", value: "$29.00 - Paid" },
         { label: "December 2023", value: "$29.00 - Paid" }
       ]
+    },
+    status: {
+      title: "Part Status",
+      data: [
+        { id: 1, value: "Available", color: "22c55e" },
+        { id: 2, value: "Out of Stock", color: "ef4444" },
+        { id: 3, value: "Discontinued", color: "6b7280" }
+      ]
     }
   },
   customer: {
@@ -139,6 +170,39 @@ export const TAB_DATA = {
         { id: 1, value: "Active", color: "22c55e" },
         { id: 2, value: "Inactive", color: "ef4444" },
         { id: 3, value: "Pending", color: "f59e0b" }
+      ]
+    }
+  },
+  item: {
+    status: {
+      title: "Item Status",
+      data: [
+        { id: 1, value: "In Production", color: "3b82f6" },
+        { id: 2, value: "Completed", color: "22c55e" },
+        { id: 3, value: "On Hold", color: "f59e0b" },
+        { id: 4, value: "Cancelled", color: "ef4444" }
+      ]
+    }
+  },
+  parcel: {
+    status: {
+      title: "Parcel Status",
+      data: [
+        { id: 1, value: "Preparing", color: "f59e0b" },
+        { id: 2, value: "In Transit", color: "3b82f6" },
+        { id: 3, value: "Delivered", color: "22c55e" },
+        { id: 4, value: "Returned", color: "ef4444" }
+      ]
+    }
+  },
+  job: {
+    status: {
+      title: "Job Status",
+      data: [
+        { id: 1, value: "Queued", color: "6b7280" },
+        { id: 2, value: "In Progress", color: "3b82f6" },
+        { id: 3, value: "Completed", color: "22c55e" },
+        { id: 4, value: "Failed", color: "ef4444" }
       ]
     }
   }

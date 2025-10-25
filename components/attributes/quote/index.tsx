@@ -5,12 +5,13 @@ import { QUOTE_TABS, TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 import { General } from "./general";
 import { Security } from "./security";
 import { Privacy } from "./privacy";
+import { Status } from "./status";
 
 export const QuoteTabs = () => {
     return (
         <div className="rounded-lg border bg-card p-6 text-card-foreground shadow-sm">
             <h3 className="mb-4 font-semibold text-lg">Quote</h3>
-            <Tabs defaultValue={QUOTE_TABS.GENERAL}>
+            <Tabs defaultValue={QUOTE_TABS.STATUS}>
                 <TabsList>
                     {Object.keys(QUOTE_TABS).map((key) => {
                         const tabKey = key as keyof typeof QUOTE_TABS;
@@ -23,6 +24,9 @@ export const QuoteTabs = () => {
                         );
                     })}
                 </TabsList>
+                <TabsContent value={QUOTE_TABS.STATUS}>
+                    <Status />
+                </TabsContent>
                 <TabsContent value={QUOTE_TABS.GENERAL}>
                     <General />
                 </TabsContent>

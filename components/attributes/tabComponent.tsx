@@ -6,6 +6,9 @@ import { TicketTabs } from "./ticket";
 import { QuoteTabs } from "./quote";
 import { PartTabs } from "./part";
 import { CustomerTabs } from "./customer";
+import { ItemTabs } from "./item";
+import { ParcelTabs } from "./parcel";
+import { JobTabs } from "./job";
 
 interface TabComponentProps {
   defaultValue?: string;
@@ -42,6 +45,18 @@ export const TabComponent = ({ defaultValue = ATTRIBUTE_TYPES.TICKET, className 
 
       <TabsContent value={ATTRIBUTE_TYPES.CUSTOMER}>
         <CustomerTabs />
+      </TabsContent>
+
+      <TabsContent value={ATTRIBUTE_TYPES.ITEM}>
+        <ItemTabs />
+      </TabsContent>
+
+      <TabsContent value={ATTRIBUTE_TYPES.PARCEL}>
+        <ParcelTabs />
+      </TabsContent>
+
+      <TabsContent value={ATTRIBUTE_TYPES.JOB}>
+        <JobTabs />
       </TabsContent>
     </Tabs>
   );
