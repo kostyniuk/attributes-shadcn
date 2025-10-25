@@ -36,9 +36,9 @@ export const TAB_DATA = {
     status: {
       title: "Ticket Status",
       data: [
-        { id: "status-1", label: "Open", value: "Open", color: "878358" },
-        { id: "status-2", label: "Closed", value: "Closed", color: "eee" },
-        { id: "status-3", label: "Delivered", value: "Delivered", color: "064ec2" }
+        { id: 1, label: "Open", value: "Open", color: "878358" },
+        { id: 2, label: "Closed", value: "Closed", color: "eee" },
+        { id: 3, label: "Delivered", value: "Delivered", color: "064ec2" }
       ]
     },
     productionTime: {
@@ -46,6 +46,7 @@ export const TAB_DATA = {
       data: [
         { id: 1,name: "2 weeks", days: 10 },
         { id: 2,name: "3 days", days: 3 },
+        { id: 3,name: "1 week", days: 7 },
       ]
     },
     deliveryOptions: {

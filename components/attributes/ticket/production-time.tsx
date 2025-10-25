@@ -3,6 +3,7 @@ import { TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLegend,
   FieldSet,
@@ -12,9 +13,12 @@ import { Button } from "@/components/ui/button"
 import { Copy, Trash2 } from "lucide-react";
 import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupText } from "@/components/ui/input-group";
 import { useForm } from "@tanstack/react-form";
+import { z } from "zod";
+import { toast } from "sonner";
+import { codeToast } from "@/app/simple/helper";
 
 type ProductionTimeItem = {
-  id: number;
+  id: number | null;
   name: string;
   days: number;
 }
@@ -25,6 +29,19 @@ export const ProductionTime = () => {
   const form = useForm({
     defaultValues: {
       productionTimes: data
+    },
+    onSubmit: async ({ value }) => {
+      console.log(value);
+      toast("You submitted the following values:", codeToast(value));
+    },
+    validators: {
+      onSubmit: z.object({
+        productionTimes: z.array(z.object({
+          id: z.number().nullable(),
+          name: z.string().min(1, 'Name is required'),
+          days: z.number().min(0, 'Days is required'),
+        })),
+      }),
     },
   });
 
@@ -48,36 +65,63 @@ export const ProductionTime = () => {
                       return (
                         <div key={i} className="flex items-center justify-between">
                           <div className="flex items-start gap-10">
-                            <form.Field name={`productionTimes[${i}].name`} // eslint-disable-next-line react/no-children-prop
-                              children={(subField) => (
-                                <Field className="w-60">
-                                  <Input
-                                    id={`production-time-name-${i}`}
-                                    value={subField.state.value}
-                                    onChange={(e) => subField.handleChange(e.target.value)}
-                                    placeholder="Production Time"
-                                  />
-                                </Field>
-                              )}
-                            />
-                            <form.Field name={`productionTimes[${i}].days`} // eslint-disable-next-line react/no-children-prop
-                              children={(subField) => (
-                                <Field className="w-26">
-                                  <InputGroup>
-                                    <InputGroupInput
-                                      id={`production-time-days-${i}`}
+                            <form.Field
+                              key={`name-${i}`}
+                              name={`productionTimes[${i}].name`}
+                              validators={{
+                                onBlur: z.string().min(1, 'Name is required'),
+                              }}
+                              children={(subField) => {
+                                const isInvalid = subField.state.meta.isTouched && !subField.state.meta.isValid
+                                return (
+                                  <Field className="w-60" data-invalid={isInvalid}>
+                                    <Input
+                                      id={`production-time-name-${i}`}
                                       value={subField.state.value}
-                                      type="number"
-                                      onChange={(e) => subField.handleChange(Number(e.target.value))}
-                                      placeholder="Production Time Days"
-                                      min={0}
+                                      onChange={(e) => subField.handleChange(e.target.value)}
+                                      placeholder="Production Time"
+                                      onBlur={subField.handleBlur}
+                                      aria-invalid={isInvalid}
                                     />
-                                    <InputGroupAddon align="inline-end">
-                                      <InputGroupText>Days</InputGroupText>
-                                    </InputGroupAddon>
-                                  </InputGroup>
-                                </Field>
-                              )}
+                                    {isInvalid && (
+                                      <FieldError errors={subField.state.meta.errors} />
+                                    )}
+                                  </Field>
+                                )
+                              }}
+                            >
+                            </form.Field>
+                            <form.Field
+                              key={`days-${i}`}
+                              name={`productionTimes[${i}].days`}
+                              validators={{
+                                onBlur: z.number().min(0, 'Please provide a valid time').max(99, 'Maximum is 99'),
+                              }}
+                              children={(subField) => {
+                                const isInvalid = subField.state.meta.isTouched && !subField.state.meta.isValid
+                                return (
+                                  <Field className="w-26">
+                                    <InputGroup>
+                                      <InputGroupInput
+                                        id={`production-time-days-${i}`}
+                                        value={subField.state.value}
+                                        type="number"
+                                        onChange={(e) => subField.handleChange(Number(e.target.value))}
+                                        placeholder="Production Time Days"
+                                        min={0}
+                                        onBlur={subField.handleBlur}
+                                        aria-invalid={isInvalid}
+                                      />
+                                      <InputGroupAddon align="inline-end">
+                                        <InputGroupText>Days</InputGroupText>
+                                      </InputGroupAddon>
+                                    </InputGroup>
+                                    {isInvalid && (
+                                      <FieldError errors={subField.state.meta.errors} />
+                                    )}
+                                  </Field>
+                                )
+                              }}
                             />
                             <Copy
                               className="cursor-pointer size-4 mt-[10px] text-blue-600 hover:text-blue-700"
@@ -88,36 +132,35 @@ export const ProductionTime = () => {
                         </div>
                       )
                     })}
-                  </FieldGroup>
-
-                  < Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => field.pushValue({ id: 0, name: '', days: 0 })}
-                    className="w-fit"
-                  >
-                    Add Production Time
-                  </Button >
-                  <FieldGroup className="flex-row gap-2">
-                    <Button
-                      type="submit"
-                      variant="default"
-                      size="sm"
-                      form="production-time-form"
-                      className="w-fit"
-                    >
-                      Submit
-                    </Button>
-                    <Button
+                    < Button
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={() => form.reset()}
+                      onClick={() => field.pushValue({ id: null, name: '', days: 0 })}
                       className="w-fit"
                     >
-                      Reset
-                    </Button>
+                      Add Production Time
+                    </Button >
+                    <FieldGroup className="flex-row gap-2">
+                      <Button
+                        type="submit"
+                        variant="default"
+                        size="sm"
+                        form="production-time-form"
+                        className="w-fit"
+                      >
+                        Submit
+                      </Button>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => form.reset()}
+                        className="w-fit"
+                      >
+                        Reset
+                      </Button>
+                    </FieldGroup>
                   </FieldGroup>
                 </FieldSet>
               </FieldGroup>

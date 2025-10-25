@@ -18,14 +18,14 @@ import { toast } from "sonner";
 import { codeToast } from "@/app/simple/helper";
 import { z } from "zod";
 interface StatusItem {
-  id: string;
+  id: number | null;
   value: string;
   color: string;
 }
 
 const statusSchema = z.object({
   statuses: z.array(z.object({
-    id: z.string(),
+    id: z.number().nullable(),
     value: z.string().min(1, 'Name is required'),
     color: z.string().length(6, 'Color must be 6'),
   })),
@@ -128,7 +128,7 @@ export const Status = () => {
                       type="button"
                       variant="outline"
                       size="sm"
-                      onClick={() => field.pushValue({ id: '', value: '', color: `000000` })}
+                      onClick={() => field.pushValue({ id: null, value: '', color: `000000` })}
                       className="w-fit"
                     >
                       Add Status
