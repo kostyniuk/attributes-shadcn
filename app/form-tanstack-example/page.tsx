@@ -11,58 +11,17 @@ interface HobbiesItem {
 }
 
 interface SortableHobbyItemProps {
-    hobby: HobbiesItem;
+    id: number | string;
     index: number;
-    hobbiesField: any;
+    children: React.ReactNode;
 }
 
-function SortableHobbyItem({ hobby, index, hobbiesField }: SortableHobbyItemProps) {
-    const { ref, isDragging } = useSortable({ id: hobby.id, index });
+function SortableItem({ id, index, children }: SortableHobbyItemProps) {
+    const { ref, isDragging } = useSortable({ id, index });
 
     return (
-        <div key={hobby.id} ref={ref} style={{ opacity: isDragging ? 0.5 : 1 }}>
-            <hobbiesField.form.Field
-                name={`hobbies[${index}].name`}
-                // eslint-disable-next-line react/no-children-prop
-                children={(field: any) => {
-                    return (
-                        <div>
-                            <label htmlFor={field.name}>Name:</label>
-                            <input
-                                id={field.name}
-                                name={field.name}
-                                value={field.state.value}
-                                onBlur={field.handleBlur}
-                                onChange={(e) => field.handleChange(e.target.value)}
-                            />
-                            <button
-                                type="button"
-                                onClick={() => hobbiesField.removeValue(index)}
-                            >
-                                X
-                            </button>
-                        </div>
-                    )
-                }}
-            />
-            <hobbiesField.form.Field
-                name={`hobbies[${index}].description`}
-                // eslint-disable-next-line react/no-children-prop
-                children={(field: any) => {
-                    return (
-                        <div>
-                            <label htmlFor={field.name}>Description:</label>
-                            <input
-                                id={field.name}
-                                name={field.name}
-                                value={field.state.value}
-                                onBlur={field.handleBlur}
-                                onChange={(e) => field.handleChange(e.target.value)}
-                            />
-                        </div>
-                    )
-                }}
-            />
+        <div key={id} ref={ref} style={{ opacity: isDragging ? 0.5 : 1 }}>
+            {children}
         </div>
     );
 }
@@ -121,12 +80,54 @@ export default function FormTanstackExample() {
                                 {!hobbiesField.state.value.length
                                     ? 'No hobbies found.'
                                     : hobbiesField.state.value.map((hobby, i) => (
-                                        <SortableHobbyItem
+                                        <SortableItem
+                                            id={hobby.id}
                                             key={hobby.id}
-                                            hobby={hobby}
                                             index={i}
-                                            hobbiesField={hobbiesField}
-                                        />
+                                        >
+                                            <form.Field
+                                                name={`hobbies[${i}].name`}
+                                                // eslint-disable-next-line react/no-children-prop
+                                                children={(field: any) => {
+                                                    return (
+                                                        <div>
+                                                            <label htmlFor={field.name}>Name:</label>
+                                                            <input
+                                                                id={field.name}
+                                                                name={field.name}
+                                                                value={field.state.value}
+                                                                onBlur={field.handleBlur}
+                                                                onChange={(e) => field.handleChange(e.target.value)}
+                                                            />
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => hobbiesField.removeValue(i)}
+                                                            >
+                                                                X
+                                                            </button>
+                                                        </div>
+                                                    )
+                                                }}
+                                            />
+                                            <form.Field
+                                                name={`hobbies[${i}].description`}
+                                                // eslint-disable-next-line react/no-children-prop
+                                                children={(field: any) => {
+                                                    return (
+                                                        <div>
+                                                            <label htmlFor={field.name}>Description:</label>
+                                                            <input
+                                                                id={field.name}
+                                                                name={field.name}
+                                                                value={field.state.value}
+                                                                onBlur={field.handleBlur}
+                                                                onChange={(e) => field.handleChange(e.target.value)}
+                                                            />
+                                                        </div>
+                                                    )
+                                                }}
+                                            />
+                                        </SortableItem>
                                     ))}
                             </div>
                             <button
