@@ -6,7 +6,6 @@ interface HobbiesItem {
     id: number | string;
     name: string;
     description: string;
-    yearsOfExperience: number;
 }
 
 interface SortableHobbyItemProps {
@@ -29,21 +28,18 @@ export default function FormTanstackExample() {
     const hobbies = [
         {
             id: 1,
-            name: 'Reading',
-            description: 'Reading is a hobby of mine',
-            yearsOfExperience: 10
+            name: 'NBA',
+            description: 'Golden State Warriors',
         },
         {
             id: 2,
-            name: 'Writing',
-            description: 'Writing is a hobby of mine',
-            yearsOfExperience: 5
+            name: 'Soccer',
+            description: 'Real Madrid',
         },
         {
             id: 3,
-            name: 'Coding',
-            description: 'Coding is a hobby of mine',
-            yearsOfExperience: 3
+            name: 'Netflix',
+            description: 'sometimes',
         }
     ]
 
@@ -135,8 +131,7 @@ export default function FormTanstackExample() {
                                     hobbiesField.pushValue({
                                         id: `temp-${crypto.randomUUID()}`,
                                         name: '',
-                                        description: '',
-                                        yearsOfExperience: 0,
+                                        description: ''
                                     })
                                 }
                             >
