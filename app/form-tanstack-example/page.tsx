@@ -2,7 +2,6 @@
 import { useForm } from "@tanstack/react-form";
 import { DragDropProvider } from "@dnd-kit/react";
 import { useSortable } from "@dnd-kit/react/sortable";
-import { move } from '@dnd-kit/helpers';
 interface HobbiesItem {
     id: number | string;
     name: string;
@@ -53,7 +52,7 @@ export default function FormTanstackExample() {
             hobbies: hobbies as HobbiesItem[]
         },
         onSubmit: (values) => {
-            console.log('onSubmit', values);
+            alert(JSON.stringify(values.value.hobbies));
         }
     })
     return (
@@ -62,12 +61,11 @@ export default function FormTanstackExample() {
             form.handleSubmit();
         }}>
             <DragDropProvider onDragEnd={(event) => {
-                const ids = form.state.values.hobbies.map((hobby) => hobby.id);
-                const movedIds = move(ids, event);
-                const reorderedHobbies = movedIds.map((id) =>
-                    form.state.values.hobbies.find((hobby) => hobby.id === id)!
-                );
-                form.setFieldValue('hobbies', reorderedHobbies);
+                const { source, target } = event?.operation || {};
+                const oldIndex = form.state.values.hobbies.findIndex(hobby => hobby.id === source?.id);
+                const newIndex = (target as any)?.sortable?.index ?? 0;
+
+                form.moveFieldValues('hobbies', oldIndex, newIndex);
             }}>
                 <form.Field
                     name="hobbies"
