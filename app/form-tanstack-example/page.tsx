@@ -63,6 +63,7 @@ export default function FormTanstackExample() {
             <DragDropProvider onDragEnd={(event) => {
                 const { source, target } = event?.operation || {};
                 const oldIndex = form.state.values.hobbies.findIndex(hobby => hobby.id === source?.id);
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const newIndex = (target as any)?.sortable?.index ?? 0;
 
                 form.moveFieldValues('hobbies', oldIndex, newIndex);
@@ -86,7 +87,7 @@ export default function FormTanstackExample() {
                                             <form.Field
                                                 name={`hobbies[${i}].name`}
                                                 // eslint-disable-next-line react/no-children-prop
-                                                children={(field: any) => {
+                                                children={(field) => {
                                                     return (
                                                         <div>
                                                             <label htmlFor={field.name}>Name:</label>
@@ -110,7 +111,7 @@ export default function FormTanstackExample() {
                                             <form.Field
                                                 name={`hobbies[${i}].description`}
                                                 // eslint-disable-next-line react/no-children-prop
-                                                children={(field: any) => {
+                                                children={(field) => {
                                                     return (
                                                         <div>
                                                             <label htmlFor={field.name}>Description:</label>
