@@ -53,8 +53,7 @@ export const Industries = () => {
                 <DragDropProvider onDragEnd={(event) => {
                     const { source, target } = event?.operation || {};
                     const oldIndex = form.state.values.industries.findIndex(industry => Number(industry.id) === Number(source?.id));
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    const newIndex = (target as any)?.sortable?.index ?? 0;
+                    const newIndex = (target as { sortable?: { index: number } })?.sortable?.index ?? 0;
 
                     form.moveFieldValues('industries', oldIndex, newIndex);
                 }}>
