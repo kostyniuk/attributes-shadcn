@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { ColorPickerWithLabel } from "@/components/ui/custom/color-picker-with-label";
 import { Trash2 } from "lucide-react";
-import { useForm } from "@tanstack/react-form";
+import { useAppForm } from "@/hooks/form";
 import { toast } from "sonner";
 import { codeToast } from "@/app/simple/helper";
 import { z } from "zod";
@@ -34,7 +34,7 @@ const statusSchema = z.object({
 export const Status = () => {
     const data = TAB_DATA[ATTRIBUTE_TYPES.QUOTE].status.data as StatusItem[];
 
-    const form = useForm({
+    const form = useAppForm({
         defaultValues: {
             statuses: data
         },
@@ -133,26 +133,9 @@ export const Status = () => {
                                         >
                                             Add Status
                                         </Button>
-                                        <FieldGroup className="flex-row gap-2">
-                                            <Button
-                                                type="submit"
-                                                variant="default"
-                                                size="sm"
-                                                form="quote-status-form"
-                                                className="w-fit"
-                                            >
-                                                Submit
-                                            </Button>
-                                            <Button
-                                                type="button"
-                                                variant="outline"
-                                                size="sm"
-                                                onClick={() => form.reset()}
-                                                className="w-fit"
-                                            >
-                                                Reset
-                                            </Button>
-                                        </FieldGroup>
+                                        <form.AppForm>
+                                            <form.ConfirmSection submitLabel="Submit" resetLabel="Reset" />
+                                        </form.AppForm>
                                     </FieldGroup>
                                 </FieldSet>
                             </FieldGroup>

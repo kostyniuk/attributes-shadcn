@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react";
 import { InputGroup, InputGroupInput, InputGroupAddon, InputGroupText } from "@/components/ui/input-group";
-import { useForm } from "@tanstack/react-form";
+import { useAppForm } from "@/hooks/form";
 import { z } from "zod";
 import { toast } from "sonner";
 import { codeToast } from "@/app/simple/helper";
@@ -26,7 +26,7 @@ type ValidUntilItem = {
 export const ValidUntil = () => {
     const data = TAB_DATA[ATTRIBUTE_TYPES.QUOTE].validUntil.data as ValidUntilItem[];
 
-    const form = useForm({
+    const form = useAppForm({
         defaultValues: {
             validUntil: data
         },
@@ -138,26 +138,9 @@ export const ValidUntil = () => {
                                         >
                                             Add Valid Until
                                         </Button>
-                                        <FieldGroup className="flex-row gap-2">
-                                            <Button
-                                                type="submit"
-                                                variant="default"
-                                                size="sm"
-                                                form="quote-valid-until-form"
-                                                className="w-fit"
-                                            >
-                                                Submit
-                                            </Button>
-                                            <Button
-                                                type="button"
-                                                variant="outline"
-                                                size="sm"
-                                                onClick={() => form.reset()}
-                                                className="w-fit"
-                                            >
-                                                Reset
-                                            </Button>
-                                        </FieldGroup>
+                                        <form.AppForm>
+                                            <form.ConfirmSection submitLabel="Submit" resetLabel="Reset" />
+                                        </form.AppForm>
                                     </FieldGroup>
                                 </FieldSet>
                             </FieldGroup>

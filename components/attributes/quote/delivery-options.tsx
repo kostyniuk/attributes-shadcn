@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react";
-import { useForm } from "@tanstack/react-form";
+import { useAppForm } from "@/hooks/form";
 import { toast } from "sonner";
 import { codeToast } from "@/app/simple/helper";
 import { z } from "zod";
@@ -32,7 +32,7 @@ const deliveryOptionsSchema = z.object({
 export const DeliveryOptions = () => {
     const data = TAB_DATA[ATTRIBUTE_TYPES.QUOTE].deliveryOptions.data as DeliveryOptionItem[];
 
-    const form = useForm({
+    const form = useAppForm({
         defaultValues: {
             deliveryOptions: data
         },
@@ -106,26 +106,9 @@ export const DeliveryOptions = () => {
                                         >
                                             Add Delivery Option
                                         </Button>
-                                        <FieldGroup className="flex-row gap-2">
-                                            <Button
-                                                type="submit"
-                                                variant="default"
-                                                size="sm"
-                                                form="quote-delivery-options-form"
-                                                className="w-fit"
-                                            >
-                                                Submit
-                                            </Button>
-                                            <Button
-                                                type="button"
-                                                variant="outline"
-                                                size="sm"
-                                                onClick={() => form.reset()}
-                                                className="w-fit"
-                                            >
-                                                Reset
-                                            </Button>
-                                        </FieldGroup>
+                                        <form.AppForm>
+                                            <form.ConfirmSection submitLabel="Submit" resetLabel="Reset" />
+                                        </form.AppForm>
                                     </FieldGroup>
                                 </FieldSet>
                             </FieldGroup>

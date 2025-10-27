@@ -5,8 +5,8 @@ import { FieldGroup } from "../field"
 export const ConfirmSection = ({ submitLabel, resetLabel }: { submitLabel: string, resetLabel: string }) => {
     const form = useFormContext()
     return (
-        <form.Subscribe selector={(state) => [state.canSubmit, state.isPristine]}>
-            {([canSubmit, isPristine]) => {
+        <form.Subscribe selector={(state) => [state.canSubmit, state.isPristine, state.isDirty]}>
+            {([canSubmit, isPristine, isDirty]) => {
                 return (
                     <>
                         {!isPristine && <FieldGroup className="flex-row gap-2">
@@ -26,7 +26,6 @@ export const ConfirmSection = ({ submitLabel, resetLabel }: { submitLabel: strin
                                 size="sm"
                                 onClick={() => form.reset()}
                                 className="w-fit"
-                                disabled={isPristine}
                             >
                                 {resetLabel}
                             </Button>
