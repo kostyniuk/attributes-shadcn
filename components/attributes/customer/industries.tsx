@@ -2,14 +2,11 @@
 
 import { TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 import {
-    Field,
     FieldDescription,
-    FieldError,
     FieldGroup,
     FieldLegend,
     FieldSet,
 } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Trash2 } from "lucide-react";
 import { useAppForm } from "@/hooks/form";
