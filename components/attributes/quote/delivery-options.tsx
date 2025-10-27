@@ -65,33 +65,13 @@ export const DeliveryOptions = () => {
                                             return (
                                                 <div key={i} className="flex items-center justify-between">
                                                     <div key={i} className="flex items-start gap-10">
-                                                        <form.Field
-                                                            key={`name-${i}`}
-                                                            name={`deliveryOptions[${i}].name`}
-                                                            validators={{
-                                                                onBlur: z.string().min(1, 'Name is required'),
-                                                            }}
-                                                        >
+                                                        <form.AppField name={`deliveryOptions[${i}].name`} validators={{
+                                                            onBlur: z.string().min(1, 'Name is required'),
+                                                        }}>
                                                             {(subField) => {
-                                                                const isInvalid =
-                                                                    subField.state.meta.isTouched && !subField.state.meta.isValid
-                                                                return (
-                                                                    <Field className="w-60" data-invalid={isInvalid}>
-                                                                        <Input
-                                                                            id={`quote-delivery-option-${i}`}
-                                                                            value={subField.state.value as string}
-                                                                            onChange={(e) => subField.handleChange((e.target.value))}
-                                                                            placeholder="Delivery Option"
-                                                                            onBlur={subField.handleBlur}
-                                                                            aria-invalid={isInvalid}
-                                                                        />
-                                                                        {isInvalid && (
-                                                                            <FieldError errors={subField.state.meta.errors} />
-                                                                        )}
-                                                                    </Field>
-                                                                )
+                                                                return <subField.TextInputField placeholder="Delivery Option" />
                                                             }}
-                                                        </form.Field>
+                                                        </form.AppField>
                                                         <Trash2 className="cursor-pointer size-4 mt-[10px] text-red-500 hover:text-red-700" onClick={() => field.removeValue(i)} />
                                                     </div>
                                                 </div>

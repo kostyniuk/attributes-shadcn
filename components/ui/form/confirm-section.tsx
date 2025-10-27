@@ -6,7 +6,7 @@ export const ConfirmSection = ({ submitLabel, resetLabel }: { submitLabel: strin
     const form = useFormContext()
     return (
         <form.Subscribe selector={(state) => [state.canSubmit, state.isPristine, state.isDirty]}>
-            {([canSubmit, isPristine, isDirty]) => {
+            {([canSubmit, isPristine]) => {
                 return (
                     <>
                         {!isPristine && <FieldGroup className="flex-row gap-2">
@@ -14,7 +14,6 @@ export const ConfirmSection = ({ submitLabel, resetLabel }: { submitLabel: strin
                                 type="submit"
                                 variant="default"
                                 size="sm"
-                                form="status-form"
                                 className="w-fit"
                                 disabled={!canSubmit}
                             >
