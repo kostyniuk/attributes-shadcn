@@ -27,6 +27,14 @@ interface ColorPickerWithLabelProps {
 
 const isValidHex = (val: string) => /^[a-fA-F0-9]{6}$/.test(val);
 
+const debounce = (func: (...args: any[]) => void, wait: number) => {
+  let timeout: ReturnType<typeof setTimeout>;
+  return (...args: any[]) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func(...args), wait);
+  };
+};
+
 export function ColorPickerWithLabel({
   value,
   onChange,
@@ -56,7 +64,7 @@ export function ColorPickerWithLabel({
     }
   };
 
-  const handleColorPickerChange = (colorValue: string) => {
+  const handleColorPickerChange = debounce((colorValue: string) => {
     // Color picker returns value with #, remove it for storage
     const cleanValue = colorValue.replace('#', '');
     // Avoid rewriting user input while they are typing
@@ -66,7 +74,7 @@ export function ColorPickerWithLabel({
         setLastValid(cleanValue);
       }
     }
-  };
+  }, 100);
 
   return (
     <div className="flex items-center gap-2">
