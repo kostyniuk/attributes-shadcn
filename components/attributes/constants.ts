@@ -51,9 +51,9 @@ export const TAB_DATA = {
     status: {
       title: "Ticket Status",
       data: [
-        { id: 1, label: "Open", value: "Open", color: "878358" },
-        { id: 2, label: "Closed", value: "Closed", color: "eee" },
-        { id: 3, label: "Delivered", value: "Delivered", color: "064ec2" }
+        { id: 1, label: "Open", value: "Open", color: "8b7355" },
+        { id: 2, label: "Closed", value: "Closed", color: "9ca3af" },
+        { id: 3, label: "Delivered", value: "Delivered", color: "3b82f6" }
       ]
     },
     productionTime: {
@@ -76,10 +76,10 @@ export const TAB_DATA = {
     status: {
       title: "Quote Status",
       data: [
-        { id: 1, value: "Draft", color: "f59e0b" },
+        { id: 1, value: "Draft", color: "8b7355" },
         { id: 2, value: "Sent", color: "3b82f6" },
-        { id: 3, value: "Accepted", color: "22c55e" },
-        { id: 4, value: "Rejected", color: "ef4444" }
+        { id: 3, value: "Accepted", color: "10b981" },
+        { id: 4, value: "Rejected", color: "9ca3af" }
       ]
     },
     deliveryOptions: {
@@ -126,9 +126,9 @@ export const TAB_DATA = {
     status: {
       title: "Part Status",
       data: [
-        { id: 1, value: "Available", color: "22c55e" },
-        { id: 2, value: "Out of Stock", color: "ef4444" },
-        { id: 3, value: "Discontinued", color: "6b7280" }
+        { id: 1, value: "Available", color: "10b981" },
+        { id: 2, value: "Out of Stock", color: "9ca3af" },
+        { id: 3, value: "Discontinued", color: "8b7355" }
       ]
     }
   },
@@ -136,9 +136,9 @@ export const TAB_DATA = {
     status: {
       title: "Customer Status",
       data: [
-        { id: 1, value: "Active", color: "22c55e" },
-        { id: 2, value: "Inactive", color: "ef4444" },
-        { id: 3, value: "Pending", color: "f59e0b" }
+        { id: 1, value: "Active", color: "10b981" },
+        { id: 2, value: "Inactive", color: "9ca3af" },
+        { id: 3, value: "Pending", color: "8b7355" }
       ]
     },
     industries: {
@@ -162,9 +162,9 @@ export const TAB_DATA = {
       title: "Item Status",
       data: [
         { id: 1, value: "In Production", color: "3b82f6" },
-        { id: 2, value: "Completed", color: "22c55e" },
-        { id: 3, value: "On Hold", color: "f59e0b" },
-        { id: 4, value: "Cancelled", color: "ef4444" }
+        { id: 2, value: "Completed", color: "10b981" },
+        { id: 3, value: "On Hold", color: "8b7355" },
+        { id: 4, value: "Cancelled", color: "9ca3af" }
       ]
     }
   },
@@ -172,10 +172,10 @@ export const TAB_DATA = {
     status: {
       title: "Parcel Status",
       data: [
-        { id: 1, value: "Preparing", color: "f59e0b" },
+        { id: 1, value: "Preparing", color: "8b7355" },
         { id: 2, value: "In Transit", color: "3b82f6" },
-        { id: 3, value: "Delivered", color: "22c55e" },
-        { id: 4, value: "Returned", color: "ef4444" }
+        { id: 3, value: "Delivered", color: "10b981" },
+        { id: 4, value: "Returned", color: "9ca3af" }
       ]
     }
   },
@@ -183,10 +183,10 @@ export const TAB_DATA = {
     status: {
       title: "Job Status",
       data: [
-        { id: 1, value: "Queued", color: "6b7280" },
+        { id: 1, value: "Queued", color: "9ca3af" },
         { id: 2, value: "In Progress", color: "3b82f6" },
-        { id: 3, value: "Completed", color: "22c55e" },
-        { id: 4, value: "Failed", color: "ef4444" }
+        { id: 3, value: "Completed", color: "10b981" },
+        { id: 4, value: "Failed", color: "8b7355" }
       ]
     }
   }
