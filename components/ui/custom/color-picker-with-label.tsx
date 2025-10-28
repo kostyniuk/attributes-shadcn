@@ -27,8 +27,10 @@ interface ColorPickerWithLabelProps {
 
 const isValidHex = (val: string) => /^[a-fA-F0-9]{6}$/.test(val);
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const debounce = (func: (...args: any[]) => void, wait: number) => {
   let timeout: ReturnType<typeof setTimeout>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (...args: any[]) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => func(...args), wait);
