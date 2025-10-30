@@ -11,8 +11,7 @@ export const ATTRIBUTE_TYPES = {
 
 export const TICKET_TABS = {
   STATUS: 'status',
-  PRODUCTION_TIME: 'productionTime',
-  VAT_RATES: 'vatRates'
+  
 } as const;
 
 export const QUOTE_TABS = {
@@ -23,14 +22,16 @@ export const QUOTE_TABS = {
 
 export const PART_TABS = {
   STATUS: 'status',
-  PLAN: 'plan',
-  PAYMENT: 'payment',
-  HISTORY: 'history',
+  // PLAN: 'plan',
+  // PAYMENT: 'payment',
+  // HISTORY: 'history',
+  PRODUCTION_TIME: 'productionTime'
 } as const;
 
 export const CUSTOMER_TABS = {
   STATUS: 'status',
-  INDUSTRIES: 'industries'
+  INDUSTRIES: 'industries',
+  VAT_RATES: 'vatRates'
 } as const;
 
 export const ITEM_TABS = {
@@ -56,21 +57,7 @@ export const TAB_DATA = {
         { id: 3, label: "Delivered", value: "Delivered", color: "3b82f6" }
       ]
     },
-    productionTime: {
-      title: "Production Time",
-      data: [
-        { id: 1,name: "2 weeks", days: 10 },
-        { id: 2,name: "3 days", days: 3 },
-        { id: 3,name: "1 week", days: 7 },
-      ]
-    },
-    vatRates: {
-      title: "Vat Rates",
-      data: [
-        { id: 1, value: 20 },
-        { id: 2, value: 10 },
-      ]
-    },
+    
   },
   quote: {
     status: {
@@ -101,6 +88,14 @@ export const TAB_DATA = {
     }
   },
   part: {
+    productionTime: {
+      title: "Production Time",
+      data: [
+        { id: 1,name: "2 weeks", days: 10 },
+        { id: 2,name: "3 days", days: 3 },
+        { id: 3,name: "1 week", days: 7 },
+      ]
+    },
     plan: {
       title: "Current Plan",
       data: [
@@ -155,7 +150,14 @@ export const TAB_DATA = {
         { id: 9, name: "Technology" },
         { id: 10, name: "Other" },
       ]
-    }
+    },
+    vatRates: {
+      title: "Vat Rates",
+      data: [
+        { id: 1, value: 20 },
+        { id: 2, value: 10 },
+      ]
+    },
   },
   item: {
     status: {

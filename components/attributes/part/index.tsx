@@ -2,10 +2,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PART_TABS, TAB_DATA, ATTRIBUTE_TYPES } from "../constants";
 
 // Part components
-import { CurrentPlan } from "./current-plan";
-import { PaymentMethod } from "./payment-method";
-import { BillingHistory } from "./billing-history";
 import { Status } from "./status";
+import { ProductionTime } from "./production-time";
 
 export const PartTabs = () => {
     return (
@@ -27,7 +25,10 @@ export const PartTabs = () => {
                 <TabsContent value={PART_TABS.STATUS}>
                     <Status />
                 </TabsContent>
-                <TabsContent value={PART_TABS.PLAN}>
+                <TabsContent value={PART_TABS.PRODUCTION_TIME}>
+                    <ProductionTime />
+                </TabsContent>
+                {/* <TabsContent value={PART_TABS.PLAN}>
                     <CurrentPlan />
                 </TabsContent>
                 <TabsContent value={PART_TABS.PAYMENT}>
@@ -35,7 +36,7 @@ export const PartTabs = () => {
                 </TabsContent>
                 <TabsContent value={PART_TABS.HISTORY}>
                     <BillingHistory />
-                </TabsContent>
+                </TabsContent> */}
             </Tabs>
         </div>
     );
